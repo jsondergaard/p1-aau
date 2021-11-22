@@ -71,5 +71,5 @@ DString * scan_file(char * fname) {
 }
 
 int main( int argc, char** argv ) {
-	/* Make your program do whatever you want */
+
 }
