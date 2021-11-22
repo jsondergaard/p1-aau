@@ -1,5 +1,5 @@
 int isLeapYear(int year) {
-    if(year % 4 == FALSE && year % 100 != FALSE || year % 400 == FALSE)
+    if(year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
     {
         // It is a leap year and February has 29 days.
         return 1;
