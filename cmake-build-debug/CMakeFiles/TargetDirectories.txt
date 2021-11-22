@@ -1,5 +1,5 @@
-/Users/jacob/AAU/P1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/jacob/AAU/P1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/jacob/AAU/P1/cmake-build-debug/CMakeFiles/package_source.dir
-/Users/jacob/AAU/P1/cmake-build-debug/CMakeFiles/package.dir
-/Users/jacob/AAU/P1/cmake-build-debug/CMakeFiles/libFOO.dir
+/Users/nichlashjorth/CLionProjects/p1-aau/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/nichlashjorth/CLionProjects/p1-aau/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/nichlashjorth/CLionProjects/p1-aau/cmake-build-debug/CMakeFiles/package_source.dir
+/Users/nichlashjorth/CLionProjects/p1-aau/cmake-build-debug/CMakeFiles/package.dir
+/Users/nichlashjorth/CLionProjects/p1-aau/cmake-build-debug/CMakeFiles/libFOO.dir

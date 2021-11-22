@@ -23,7 +23,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <math.h>
 #include "d_string.h"
 
 #define kBUFFERSIZE 4096	// How many bytes to read at a time
