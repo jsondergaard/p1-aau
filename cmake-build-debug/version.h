@@ -1,8 +1,8 @@
 /*
 
-	version.h -- C-Template
+	version.h -- P1
 
-	Copyright © 2015-2019 Fletcher T. Penney.
+	Copyright © 2021-2022 B213.
 
 
 	
@@ -13,20 +13,20 @@
 
 @file
 
-@brief Boilerplate c project with cmake support, CuTest unit testing, and more. - project version header
+@brief AAU Projekt - project version header
 
 **/
 
 
-#ifndef FILE_C-TEMPLATE_H
-#define FILE_C-TEMPLATE_H
+#ifndef FILE_P1_H
+#define FILE_P1_H
 
-#define C-TEMPLATE_NAME "C-Template"
+#define P1_NAME "P1"
 
-#define C-TEMPLATE_VERSION "1.0.9"
-#define C-TEMPLATE_COPYRIGHT "Copyright © 2015-2019 Fletcher T. Penney."
+#define P1_VERSION "0.1.0"
+#define P1_COPYRIGHT "Copyright © 2021-2022 B213."
 
-#define C-TEMPLATE_LICENSE "\tThe `c-template` project is released under the MIT License.\n"\
+#define P1_LICENSE "\tThe `c-template` project is released under the MIT License.\n"\
 "	\n"\
 "	GLibFacade.c and GLibFacade.h are from the MultiMarkdown v4 project:\n"\
 "	\n"\

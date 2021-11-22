@@ -1,20 +1,20 @@
 /**
 
-	C-Template -- Boilerplate c project with cmake support, CuTest unit testing, and more.
+	P1 -- AAU Projekt
 
 	@file file.h
 
 	@brief 
 
 
-	@author	Fletcher T. Penney
+	@author	B213
 	@bug	
 
 **/
 
 /*
 
-	Copyright © 2015-2019 Fletcher T. Penney.
+	Copyright © 2021-2022 B213.
 
 
 	The `c-template` project is released under the MIT License.
@@ -53,8 +53,8 @@
 */
 
 
-#ifndef FILE_C-TEMPLATE_H
-#define FILE_C-TEMPLATE_H
+#ifndef FILE_P1_H
+#define FILE_P1_H
 
 #ifdef TEST
 #include "CuTest.h"

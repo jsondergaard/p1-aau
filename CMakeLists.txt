@@ -5,17 +5,17 @@ cmake_minimum_required (VERSION 2.6)
 # Define Our Project
 # ==================
 
-set (My_Project_Title "C-Template")
-set (My_Project_Description "Boilerplate c project with cmake support, CuTest unit testing, and more.")
-set (My_Project_Author "Fletcher T. Penney")
-set (My_Project_Revised_Date "2019-01-16")
-set (My_Project_Version_Major 1)
-set (My_Project_Version_Minor 0)
-set (My_Project_Version_Patch 9)
+set (My_Project_Title "P1")
+set (My_Project_Description "AAU Projekt")
+set (My_Project_Author "B213")
+set (My_Project_Revised_Date "2021-11-22")
+set (My_Project_Version_Major 0)
+set (My_Project_Version_Minor 1)
+set (My_Project_Version_Patch 0)
 
 set (My_Project_Version "${My_Project_Version_Major}.${My_Project_Version_Minor}.${My_Project_Version_Patch}")
 
-set (My_Project_Copyright_Date "2015-2019")
+set (My_Project_Copyright_Date "2021-2022")
 set (My_Project_Copyright "Copyright © ${My_Project_Copyright_Date} ${My_Project_Author}.")
 
 string(TOUPPER ${My_Project_Title} My_Project_Title_Caps  )

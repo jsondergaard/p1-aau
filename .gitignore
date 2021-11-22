@@ -1,7 +1,6 @@
 .DS_Store
 CHANGELOG-UNRELEASED
 documentation
-cmake-build-debug
 
 # Developer Tools
 *.pbxuser
@@ -19,6 +18,7 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+cmake-build-debug/
 
 build-xcode
 build-xcode-debug
