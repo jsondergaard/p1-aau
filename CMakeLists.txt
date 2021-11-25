@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 2.6)
+cmake_minimum_required (VERSION 3.20)
 
 
 # ==================
@@ -160,7 +160,7 @@ configure_file (
 
 # src_files are the primary files, and will be included in doxygen documentation
 set(src_files
-#	src/foo.c
+	src/main.c
 )
 
 # Primary header files, also for doxygen documentation
@@ -303,33 +303,33 @@ endif (WIN32)
 # ==============
 
 # Create a library?
-add_library(libFOO STATIC
-	${src_files}
-	${src_utility_files}
-	${header_files}
-	${header_utility_files}
-)
+#add_library(libFOO STATIC
+#	${src_files}
+#	${src_utility_files}
+#	${header_files}
+#	${header_utility_files}
+#)
 
 # remove the extra "lib" from "liblibFOO"
-SET_TARGET_PROPERTIES(libFOO PROPERTIES
-	PREFIX ""
-	FRAMEWORK TRUE
-	FRAMEWORK_VERSION A
-	MACOSX_FRAMEWORK_IDENTIFIER net.fletcherpenney.c-template
-)
+#SET_TARGET_PROPERTIES(libFOO PROPERTIES
+#	PREFIX ""
+#	FRAMEWORK TRUE
+#	FRAMEWORK_VERSION A
+#	MACOSX_FRAMEWORK_IDENTIFIER net.fletcherpenney.c-template
+#)
 
 # Create a command-line app?
-# if (NOT DEFINED TEST)
-# 	add_executable(main
-# 		src/main.c
-# 		src/d_string.c
-# 		src/d_string.h
-# 		${header_files}
-# 	)
+if (NOT DEFINED TEST)
+	add_executable(main
+		src/main.c
+		src/d_string.c
+		src/d_string.h
+ 		${header_files}
+ 	)
 # 
 #	Link the library to the app?
 #	target_link_libraries(main libFOO)
-# endif()
+endif()
 
 # Xcode settings for fat binaries
 # set_target_properties(libFOO PROPERTIES XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH "NO")
