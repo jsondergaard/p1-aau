@@ -25,19 +25,28 @@
 #include <stdlib.h>
 #include <math.h>
 #include "d_string.h"
+#include "calendar.h"
 
-#define kBUFFERSIZE 4096	// How many bytes to read at a time
+#define kBUFFERSIZE 4096 // How many bytes to read at a time
 
-DString * stdin_buffer() {
+// Pretty colors
+#define YELLOW "\x1B[33m"
+#define RESET "\x1B[0m"
+
+void printMenu(void);
+
+DString *stdin_buffer()
+{
 	/* Read from stdin and return a GString *
 		`buffer` will need to be freed elsewhere */
 
 	char chunk[kBUFFERSIZE];
 	size_t bytes;
 
-	DString * buffer = d_string_new("");
+	DString *buffer = d_string_new("");
 
-	while ((bytes = fread(chunk, 1, kBUFFERSIZE, stdin)) > 0) {
+	while ((bytes = fread(chunk, 1, kBUFFERSIZE, stdin)) > 0)
+	{
 		d_string_append_c_array(buffer, chunk, bytes);
 	}
 
@@ -46,22 +55,25 @@ DString * stdin_buffer() {
 	return buffer;
 }
 
-DString * scan_file(char * fname) {
+DString *scan_file(char *fname)
+{
 	/* Read from stdin and return a GString *
 		`buffer` will need to be freed elsewhere */
 
 	char chunk[kBUFFERSIZE];
 	size_t bytes;
 
-	FILE * file;
+	FILE *file;
 
-	if ((file = fopen(fname, "r")) == NULL ) {
+	if ((file = fopen(fname, "r")) == NULL)
+	{
 		return NULL;
 	}
 
-	DString * buffer = d_string_new("");
+	DString *buffer = d_string_new("");
 
-	while ((bytes = fread(chunk, 1, kBUFFERSIZE, file)) > 0) {
+	while ((bytes = fread(chunk, 1, kBUFFERSIZE, file)) > 0)
+	{
 		d_string_append_c_array(buffer, chunk, bytes);
 	}
 
@@ -70,8 +82,39 @@ DString * scan_file(char * fname) {
 	return buffer;
 }
 
-int main( int argc, char** argv ) {
-	/* Make your program do whatever you want */
+int main(int argc, char **argv)
+{
+	int c;
 
-    printf("Hello World");
+	do
+	{
+		printMenu();
+		c = getchar();
+
+		switch (c)
+		{
+		case 'c':
+			viewCalendar();
+			break;
+
+		case 'a':
+			printf("Add new assignment\n");
+			break;
+
+		default:
+			break;
+		}
+
+		system("clear");
+	} while (c != 'q');
+
+	return 0;
+}
+
+void printMenu(void)
+{
+	printf(YELLOW "Good day! What do you want to do?\n" RESET);
+	printf("Press c to view your calendar.\n");
+	printf("Press a to add a new assignment.\n");
+	printf("Press q to quit.\n");
 }

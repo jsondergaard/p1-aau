@@ -322,6 +322,7 @@ endif (WIN32)
 if (NOT DEFINED TEST)
 	add_executable(main
 		src/main.c
+		src/calendar.c
 		src/d_string.c
 		src/d_string.h
  		${header_files}
