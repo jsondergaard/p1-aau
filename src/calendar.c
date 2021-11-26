@@ -41,7 +41,7 @@ void viewCalendar(void)
 		for (int j = 0; j < COLUMNS; j++)
 		{
 
-			printf("|  %d\t|", calandar[i][j]);
+			printf("|  %d\t|", calendar[i][j]);
 		}
 	}
 	printf("\n_________________________________________________________\n");
