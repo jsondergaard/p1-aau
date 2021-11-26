@@ -31,6 +31,11 @@
 // Pretty colors
 #define YELLOW "\x1B[33m"
 #define RESET "\x1B[0m"
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_BLUE    "\x1b[34m"
+#define ANSI_COLOR_MAGENTA "\x1b[35m"
+#define ANSI_COLOR_CYAN    "\x1b[36m"
 
 void printMenu(void);
 
@@ -81,6 +86,9 @@ DString *scan_file(char *fname)
 	return buffer;
 }
 
+
+void calender(void);
+
 int main(int argc, char **argv)
 {
 	int c;
@@ -94,7 +102,7 @@ int main(int argc, char **argv)
 		switch (c)
 		{
 		case 'c':
-			viewCalendar();
+			calender();
 			break;
 
 		case 'a':
@@ -118,3 +126,4 @@ void printMenu(void)
 	printf("Press a to add a new assignment.\n");
 	printf("Press q to quit.\n");
 }
+
