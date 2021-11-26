@@ -18,6 +18,7 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+.vscode/
 cmake-build-debug/
 
 build-xcode
