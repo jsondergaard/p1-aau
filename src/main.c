@@ -3,17 +3,9 @@
 #include "d_string.h"
 #include "calendar.h"
 #include <sqlite3.h>
+#include "defines.h"
 
 #define kBUFFERSIZE 4096 // How many bytes to read at a time
-
-// Pretty colors
-#define YELLOW "\x1B[33m"
-#define RESET "\x1B[0m"
-#define ANSI_COLOR_RED "\x1b[31m"
-#define ANSI_COLOR_GREEN "\x1b[32m"
-#define ANSI_COLOR_BLUE "\x1b[34m"
-#define ANSI_COLOR_MAGENTA "\x1b[35m"
-#define ANSI_COLOR_CYAN "\x1b[36m"
 
 void printMenu(void);
 void assignmentList(void);
