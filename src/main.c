@@ -1,18 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "d_string.h"
-#include "calendar.h"
 #include <sqlite3.h>
 #include "defines.h"
+#include "d_string.h"
+#include "calendar.h"
 
 #define kBUFFERSIZE 4096 // How many bytes to read at a time
 
 void printMenu(void);
-void assignmentList(void);
+int assignmentList(void);
+int callback(void *, int, char **, char **);
 
 int main(int argc, char **argv)
 {
 	int c;
+
+	printf(YELLOW "Good day! What do you want to do?\n" RESET);
 
 	do
 	{
@@ -32,7 +35,7 @@ int main(int argc, char **argv)
 			break;
 
 		case 't':
-
+			assignmentList();
 			break;
 
 		case 'q':
@@ -49,7 +52,6 @@ int main(int argc, char **argv)
 
 void printMenu(void)
 {
-	printf(YELLOW "Good day! What do you want to do?\n" RESET);
 	printf("Press c to view your calendar.\n");
 	printf("Press a to add a new assignment.\n");
 #ifndef NDEBUG
@@ -58,7 +60,58 @@ void printMenu(void)
 	printf("Press q to quit.\n");
 }
 
-void assigmentList(void)
+int assignmentList(void)
 {
+	sqlite3 *db;
+	char *err_msg = 0;
+
+	int rc = sqlite3_open("database.db", &db);
+
+	if (rc != SQLITE_OK)
+	{
+		fprintf(stderr, "Cannot open database: %s\n",
+				sqlite3_errmsg(db));
+		sqlite3_close(db);
+
+		return 1;
+	}
+
 	printf("List of assignments:\n");
+
+	char *sql = "SELECT * FROM assignments";
+
+	rc = sqlite3_exec(db, sql, callback, 0, &err_msg);
+
+	if (rc != SQLITE_OK)
+	{
+
+		fprintf(stderr, "Failed to select data\n");
+		fprintf(stderr, "SQL error: %s\n", err_msg);
+
+		sqlite3_free(err_msg);
+		sqlite3_close(db);
+
+		return 1;
+	}
+
+	sqlite3_close(db);
+
+	return 1;
+}
+
+int callback(void *NotUsed, int argc, char **argv,
+			 char **azColName)
+{
+
+	NotUsed = 0;
+
+	for (int i = 0; i < argc; i++)
+	{
+
+		printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+	}
+
+	printf("\n");
+
+	return 0;
 }
