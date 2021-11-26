@@ -23,6 +23,7 @@ string(REGEX REPLACE " " "_" My_Project_Title_Caps ${My_Project_Title_Caps} )
 
 project (${My_Project_Title})
 
+find_package (SQLite3)
 
 # =========================
 # Build Submodules (if any)
@@ -39,6 +40,7 @@ project (${My_Project_Title})
 include_directories( ${PROJECT_SOURCE_DIR}/src )
 include_directories( ${PROJECT_SOURCE_DIR}/test )
 include_directories(${PROJECT_BINARY_DIR})
+include_directories(${SQLite3_INCLUDE_DIRS})
 
 
 # =================
@@ -330,6 +332,8 @@ if (NOT DEFINED TEST)
 # 
 #	Link the library to the app?
 #	target_link_libraries(main libFOO)
+
+target_link_libraries(main ${SQLite3_LIBRARIES})
 endif()
 
 # Xcode settings for fat binaries
