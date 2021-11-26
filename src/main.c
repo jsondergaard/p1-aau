@@ -14,14 +14,6 @@ int main(int argc, char **argv)
 {
 	int c;
 
-	sqlite3 *db;
-
-	if (sqlite3_open("database.db", &db))
-	{
-		printf("Error initializing database.\n");
-		exit(-1);
-	}
-
 	do
 	{
 		printMenu();
@@ -49,8 +41,6 @@ int main(int argc, char **argv)
 		}
 	} while (c != 'q');
 
-	sqlite3_close(db);
-
 	return 0;
 }
 
@@ -67,7 +57,5 @@ void printMenu(void)
 
 void assigmentList(void)
 {
-	char *sql;
-
 	printf("List of assignments:\n");
 }
