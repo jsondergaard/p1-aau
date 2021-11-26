@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 		switch (c)
 		{
 		case 'c':
-			calendar();
+			viewCalendar();
 			break;
 
 		case 'a':

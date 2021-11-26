@@ -24,7 +24,7 @@ int isLeapYear(int year)
 	}
 }
 
-void calendar(void)
+void viewCalendar(void)
 {
 
 	int calendar[ROWS][COLUMNS] = {
