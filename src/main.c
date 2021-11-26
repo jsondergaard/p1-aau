@@ -32,7 +32,10 @@ int main(int argc, char **argv)
 			break;
 
 		case 't':
-			assignmentList();
+
+			break;
+
+		case 'q':
 			break;
 
 		default:
