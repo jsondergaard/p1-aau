@@ -89,6 +89,7 @@ int main(int argc, char **argv)
 	{
 		printMenu();
 		c = getchar();
+		getchar(); // consume newline
 
 		switch (c)
 		{
