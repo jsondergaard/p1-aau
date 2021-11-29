@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.20)
+cmake_minimum_required (VERSION 3.14)
 
 
 # ==================
@@ -23,7 +23,7 @@ string(REGEX REPLACE " " "_" My_Project_Title_Caps ${My_Project_Title_Caps} )
 
 project (${My_Project_Title})
 
-find_package (SQLite3)
+find_package (SQLite3 REQUIRED)
 
 # =========================
 # Build Submodules (if any)
@@ -128,11 +128,8 @@ ENDMACRO(ADD_LINKED_FRAMEWORK)
 file(READ ${PROJECT_SOURCE_DIR}/LICENSE.txt My_Project_License)
 
 string(REGEX REPLACE "\n" "\n\t" My_Project_License_Indented ${My_Project_License})
-
 string(REGEX REPLACE "\"" "\\\\\"" My_Project_License_Escaped ${My_Project_License_Indented})
-
 string(REGEX REPLACE "\n" "\\\\n\"\\\\\n\"" My_Project_License_Literal ${My_Project_License_Escaped})
-
 
 configure_file (
 	"${PROJECT_SOURCE_DIR}/templates/template.c.in"
@@ -154,7 +151,6 @@ configure_file (
 	"${PROJECT_SOURCE_DIR}/templates/version.h.in"
 	"${PROJECT_BINARY_DIR}/version.h"
 )
-
 
 # ============
 # Source Files
@@ -333,7 +329,7 @@ if (NOT DEFINED TEST)
 #	Link the library to the app?
 #	target_link_libraries(main libFOO)
 
-target_link_libraries(main ${SQLite3_LIBRARIES})
+	target_link_libraries(main ${SQLite3_LIBRARIES})
 endif()
 
 # Xcode settings for fat binaries
