@@ -63,9 +63,9 @@ void printMenu(void)
 int assignmentList(void)
 {
 	sqlite3 *db;
-	char *err_msg = 0;
+	char *error = 0;
 
-	int rc = sqlite3_open("database.db", &db);
+	int rc = sqlite3_open("../database.db", &db);
 
 	if (rc != SQLITE_OK)
 	{
@@ -80,15 +80,15 @@ int assignmentList(void)
 
 	char *sql = "SELECT * FROM assignments";
 
-	rc = sqlite3_exec(db, sql, callback, 0, &err_msg);
+	rc = sqlite3_exec(db, sql, callback, 0, &error);
 
 	if (rc != SQLITE_OK)
 	{
 
 		fprintf(stderr, "Failed to select data\n");
-		fprintf(stderr, "SQL error: %s\n", err_msg);
+		fprintf(stderr, "SQL error: %s\n", error);
 
-		sqlite3_free(err_msg);
+		sqlite3_free(error);
 		sqlite3_close(db);
 
 		return 1;
@@ -99,16 +99,16 @@ int assignmentList(void)
 	return 1;
 }
 
-int callback(void *NotUsed, int argc, char **argv,
-			 char **azColName)
+int callback(void *nil, int argc, char **argv,
+			 char **column)
 {
 
-	NotUsed = 0;
+	nil = 0;
 
 	for (int i = 0; i < argc; i++)
 	{
 
-		printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+		printf("%s = %s\n", column[i], argv[i] ? argv[i] : "NULL");
 	}
 
 	printf("\n");
