@@ -54,12 +54,13 @@ void printMenu(void)
 {
 	printf("Press c to view your calendar.\n");
 	printf("Press a to add a new assignment.\n");
+	printf("Press q to quit.\n");
 #ifndef NDEBUG
 	printf("DEBUG: t – List of assigments.\n");
 #endif
-	printf("Press q to quit.\n");
 }
 
+#ifndef NDEBUG
 int assignmentList(void)
 {
 	sqlite3 *db;
@@ -107,7 +108,6 @@ int callback(void *nil, int argc, char **argv,
 
 	for (int i = 0; i < argc; i++)
 	{
-
 		printf("%s = %s\n", column[i], argv[i] ? argv[i] : "NULL");
 	}
 
@@ -115,3 +115,4 @@ int callback(void *nil, int argc, char **argv,
 
 	return 0;
 }
+#endif
