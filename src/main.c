@@ -9,7 +9,7 @@
 void printMenu(void);
 int assignmentList(void);
 int callback(void *, int, char **, char **);
-void PickDate (void);
+void PickDate(void);
 
 int main(int argc, char **argv)
 {
@@ -18,10 +18,13 @@ int main(int argc, char **argv)
 	printf(YELLOW "Good day! What do you want to do?\n" RESET);
 	do
 	{
+		system("clear");
+
 		printMenu();
 
-		c = getchar();
-		getchar(); // consume newline
+		system("/bin/stty raw");
+		char c = getchar();
+		system("/bin/stty cooked");
 
 		switch (c)
 		{
@@ -37,12 +40,13 @@ int main(int argc, char **argv)
 			assignmentList();
 			break;
 
-		case 'q':
+		case 'd':
+			PickDate();
 			break;
 
-        case 'd':
-            PickDate();
-            break;
+		case 'q':
+			exit(1);
+			break;
 
 		default:
 			printf("Unrecognized command.\n");
@@ -50,7 +54,7 @@ int main(int argc, char **argv)
 		}
 	} while (c != 'q');
 
-	return 0;
+	return 1;
 }
 
 void printMenu(void)
