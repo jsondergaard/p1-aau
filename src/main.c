@@ -3,6 +3,7 @@
 #include <sqlite3.h>
 #include "defines.h"
 #include "calendar.h"
+#include "assignment.h"
 
 #define kBUFFERSIZE 4096 // How many bytes to read at a time
 
@@ -25,7 +26,7 @@ int main(int argc, char **argv)
 		if (c == 'c')
 			viewCalendar();
 		else if (c == 'a')
-			printf("Add new assignment\n");
+			assignmentMenu();
 		else if (c == 't')
 			assignmentList();
 		else if (c == 'd')
@@ -33,7 +34,7 @@ int main(int argc, char **argv)
 		else if (c == 'q')
 			exit(1);
 		else
-			printf("Unknown command %s.", &c);
+			printf("Unknown command %s.\n", &c);
 	} while (c != 'q');
 
 	return 1;
