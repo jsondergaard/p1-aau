@@ -19,10 +19,13 @@ int main(int argc, char **argv)
 	printf(YELLOW "Good day! What do you want to do?\n" RESET);
 	do
 	{
+		system("clear");
+
 		printMenu();
 
+		system("/bin/stty raw");
 		c = getchar();
-		getchar(); // consume newline
+		system("/bin/stty cooked");
 
 		switch (c)
 		{
@@ -38,20 +41,21 @@ int main(int argc, char **argv)
 			assignmentList();
 			break;
 
-		case 'q':
-			break;
-
 		case 'd':
 			PickDate();
+			break;
+
+		case 'q':
+			exit(1);
 			break;
 
 		default:
 			printf("Unrecognized command.\n");
 			break;
 		}
-	} while (c != 'q');
+	} while (c != 'EOF' || c != '\n');
 
-	return 0;
+	return 1;
 }
 
 void printMenu(void)
