@@ -25,10 +25,10 @@ project (${My_Project_Title})
 
 
 # SQLite 3
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/sqlite3/)
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/lib/sqlite3/ )
 set(sqlite3_srcs 
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/sqlite3/sqlite3.c
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/sqlite3/sqlite3.h 
+	${CMAKE_CURRENT_SOURCE_DIR}/lib/sqlite3/sqlite3.c
+	${CMAKE_CURRENT_SOURCE_DIR}/lib/sqlite3/sqlite3.h 
 )
 
 
@@ -46,7 +46,7 @@ set(sqlite3_srcs
 # Search for included files here
 include_directories( ${PROJECT_SOURCE_DIR}/src )
 include_directories( ${PROJECT_SOURCE_DIR}/test )
-include_directories(${PROJECT_BINARY_DIR})
+include_directories( ${PROJECT_BINARY_DIR} )
 
 
 # =================
@@ -249,9 +249,8 @@ endif()
 
 # OS X Builds
 if (APPLE)
-
 	# Configure backwards-compatible support (if your project allows it)
-	SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.4" CACHE STRING "Deployment target for OSX" FORCE)
+	SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.5" CACHE STRING "Deployment target for OSX" FORCE)
 	SET(CMAKE_XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET "10.0" CACHE STRING "Deployment target for iOS" FORCE)
 
 	# Compile for x86_64 and i386.  ppc no longer supported
@@ -322,7 +321,7 @@ endif (WIN32)
 #	MACOSX_FRAMEWORK_IDENTIFIER net.fletcherpenney.c-template
 #)
 add_library(sqlite SHARED
-  ${sqlite3_srcs} 
+	${sqlite3_srcs} 
 )
 
 # Create a command-line app?
@@ -336,7 +335,7 @@ if (NOT DEFINED TEST)
 # 
 #	Link the library to the app?
 #	target_link_libraries(main libFOO)
-target_link_libraries(main  sqlite)
+	target_link_libraries(main sqlite)
 endif()
 
 # Xcode settings for fat binaries
