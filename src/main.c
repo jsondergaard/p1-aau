@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <sqlite3.h>
 #include "defines.h"
-#include "d_string.h"
 #include "calendar.h"
 
 #define kBUFFERSIZE 4096 // How many bytes to read at a time
