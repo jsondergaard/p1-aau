@@ -3,7 +3,6 @@
 #include <sqlite3.h>
 #include "defines.h"
 #include "calendar.h"
-#include "assignment.h"
 
 #define kBUFFERSIZE 4096 // How many bytes to read at a time
 
@@ -14,46 +13,28 @@ void PickDate(void);
 
 int main(int argc, char **argv)
 {
-	int c;
+	char c;
 
 	printf(YELLOW "Good day! What do you want to do?\n" RESET);
 	do
 	{
-		system("clear");
-
 		printMenu();
 
-		system("/bin/stty raw");
-		c = getchar();
-		system("/bin/stty cooked");
+		scanf(" %s", &c);
 
-		switch (c)
-		{
-		case 'c':
+		if (c == 'c')
 			viewCalendar();
-			break;
-
-		case 'a':
-			addAssignment();
-			break;
-
-		case 't':
+		else if (c == 'a')
+			printf("Add new assignment\n");
+		else if (c == 't')
 			assignmentList();
-			break;
-
-		case 'd':
+		else if (c == 'd')
 			PickDate();
-			break;
-
-		case 'q':
+		else if (c == 'q')
 			exit(1);
-			break;
-
-		default:
-			printf("Unrecognized command.\n");
-			break;
-		}
-	} while (c != 'EOF' || c != '\n');
+		else
+			printf("Unknown command %s.", &c);
+	} while (c != 'q');
 
 	return 1;
 }
@@ -64,7 +45,7 @@ void printMenu(void)
 	printf("Press a to add a new assignment.\n");
 	printf("Press q to quit.\n");
 #ifndef NDEBUG
-	printf("DEBUG: t – List of assignments.\n");
+	printf("DEBUG: t – List of assigments.\n");
 #endif
 }
 
