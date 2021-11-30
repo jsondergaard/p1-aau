@@ -13,8 +13,8 @@ set (My_Project_Version_Major 0)
 set (My_Project_Version_Minor 1)
 set (My_Project_Version_Patch 0)
 
-set(SQLite3_INCLUDE_DIR "./lib/sqlite-337")
-set(SQLite3_LIBRARY "./lib/sqlite-337/bin")
+#set(SQLite3_INCLUDE_DIR "./lib/sqlite-337")
+#set(SQLite3_LIBRARY "./lib/sqlite-337/bin")
 
 set (My_Project_Version "${My_Project_Version_Major}.${My_Project_Version_Minor}.${My_Project_Version_Patch}")
 
@@ -26,7 +26,9 @@ string(REGEX REPLACE " " "_" My_Project_Title_Caps ${My_Project_Title_Caps} )
 
 project (${My_Project_Title})
 
-find_package (SQLite3 REQUIRED)
+find_package (SQLite3)
+
+include_directories(${SQLite3_INCLUDE_DIRS})
 
 # =========================
 # Build Submodules (if any)
@@ -43,7 +45,6 @@ find_package (SQLite3 REQUIRED)
 include_directories( ${PROJECT_SOURCE_DIR}/src )
 include_directories( ${PROJECT_SOURCE_DIR}/test )
 include_directories(${PROJECT_BINARY_DIR})
-include_directories(${SQLite3_INCLUDE_DIRS})
 
 
 # =================
@@ -324,15 +325,12 @@ if (NOT DEFINED TEST)
 	add_executable(main
 		src/main.c
 		src/calendar.c
-		src/d_string.c
-		src/d_string.h
  		${header_files}
  	)
 # 
 #	Link the library to the app?
 #	target_link_libraries(main libFOO)
-
-	target_link_libraries(main ${SQLite3_LIBRARIES})
+target_link_libraries (main ${SQLite3_LIBRARIES})
 endif()
 
 # Xcode settings for fat binaries
