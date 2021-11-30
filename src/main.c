@@ -16,7 +16,6 @@ int main(int argc, char **argv)
 	int c;
 
 	printf(YELLOW "Good day! What do you want to do?\n" RESET);
-    PickDate();
 	do
 	{
 		printMenu();
@@ -40,6 +39,9 @@ int main(int argc, char **argv)
 
 		case 'q':
 			break;
+
+        case 'd':
+            PickDate();
 
 		default:
 			printf("Unrecognized command.\n");
