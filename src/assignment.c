@@ -4,7 +4,6 @@
 #include "defines.h"
 
 int addAssignment(void);
-time_t string_to_seconds(const char *);
 
 int assignmentMenu(void)
 {
@@ -47,36 +46,5 @@ int addAssignment(void)
 
 #ifndef NDEBUG
 	printf("Due date: %s\n", dueDate);
-	printf("Due date unix time: %d\n", string_to_seconds(&dueDate));
 #endif
-}
-
-time_t string_to_seconds(const char *timestamp_str)
-{
-	struct tm tm;
-	time_t seconds;
-	int r;
-
-	if (timestamp_str == NULL)
-	{
-		printf("null argument\n");
-		return (time_t)-1;
-	}
-	r = sscanf(timestamp_str, "%d-%d-%d %d:%d:%d", &tm.tm_year, &tm.tm_mon, &tm.tm_mday, &tm.tm_hour, &tm.tm_min, &tm.tm_sec);
-	if (r != 6)
-	{
-		printf("expected %d numbers scanned in %s\n", r, timestamp_str);
-		return (time_t)-1;
-	}
-
-	tm.tm_year -= 1900;
-	tm.tm_mon -= 1;
-	tm.tm_isdst = 0;
-	seconds = mktime(&tm);
-	if (seconds == (time_t)-1)
-	{
-		printf("reading time from %s failed\n", timestamp_str);
-	}
-
-	return seconds;
 }
