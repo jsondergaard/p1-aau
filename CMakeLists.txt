@@ -26,9 +26,12 @@ string(REGEX REPLACE " " "_" My_Project_Title_Caps ${My_Project_Title_Caps} )
 
 project (${My_Project_Title})
 
-find_package (SQLite3)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/sqlite3/)
+set(sqlite3_srcs 
+  ${CMAKE_CURRENT_SOURCE_DIR}/lib/sqlite3/sqlite3.c
+  ${CMAKE_CURRENT_SOURCE_DIR}/lib/sqlite3/sqlite3.h 
+)
 
-include_directories(${SQLite3_INCLUDE_DIRS})
 
 # =========================
 # Build Submodules (if any)
@@ -319,6 +322,9 @@ endif (WIN32)
 #	FRAMEWORK_VERSION A
 #	MACOSX_FRAMEWORK_IDENTIFIER net.fletcherpenney.c-template
 #)
+add_library(sqlite SHARED
+  ${sqlite3_srcs} 
+)
 
 # Create a command-line app?
 if (NOT DEFINED TEST)
@@ -330,7 +336,7 @@ if (NOT DEFINED TEST)
 # 
 #	Link the library to the app?
 #	target_link_libraries(main libFOO)
-target_link_libraries (main ${SQLite3_LIBRARIES})
+target_link_libraries(main  sqlite)
 endif()
 
 # Xcode settings for fat binaries
