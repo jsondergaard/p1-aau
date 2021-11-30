@@ -52,6 +52,7 @@ void printCalendar(void)
 		}
 	}
 	printf("\n_________________________________________________________\n");
+	printf("\\n");
 }
 
 void PickDate(void)
