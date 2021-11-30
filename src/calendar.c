@@ -43,10 +43,10 @@ void viewCalendar(void)
 
 void PickDate (void){
 
-    printf("\n____\n");
+    printf("\n_________________\n");
     for (int i = 0; i < 24; ++i) {
-        printf("%d: |\t\t|\n",i);
-        printf("\n____\n");
+        printf("%d: |\t'Empty'\t|\n",i);
+        printf("_________________\n");
     }
 
 }

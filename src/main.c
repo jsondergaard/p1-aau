@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 	int c;
 
 	printf(YELLOW "Good day! What do you want to do?\n" RESET);
-
+    PickDate();
 	do
 	{
 		printMenu();
