@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include "defines.h"
-
+#include "sqlite3.h"
 #define ROWS 5
 #define COLUMNS 7
+int callback(void *, int, char **, char **);
 
 int isLeapYear(int year)
 {
@@ -42,11 +43,42 @@ void viewCalendar(void)
 }
 
 void PickDate (void){
+    /*sqlite3 *db;
+    char *error = 0;
 
-    printf("\n_________________\n");
-    for (int i = 0; i < 24; ++i) {
-        printf("%d: |\t'Empty'\t|\n",i);
-        printf("_________________\n");
+    int rc = sqlite3_open("../database.db", &db);
+    if (rc != SQLITE_OK)
+    {
+        fprintf(stderr, "Cannot open database: %s\n",
+                sqlite3_errmsg(db));
+        sqlite3_close(db);
+
+        return 1;
+    }
+    char *sql = "SELECT * FROM assignments";
+    rc = sqlite3_exec(db, sql, callback, 0, &error);
+
+    char date;
+    scanf("%c",date);*/
+        printf("\n_________________\n");
+        for (int i = 0; i < 24; ++i) {
+            printf("%d: |\t'Empty'\t|\n", i);
+            printf("_________________\n");
+        }
+    /*sqlite3_close(db);
+}
+int callback(void *nil, int argc, char **argv,
+             char **column)
+{
+
+    nil = 0;
+
+    for (int i = 0; i < argc; i++)
+    {
+        printf("%s = %s\n", column[i], argv[i] ? argv[i] : "NULL");
     }
 
+    printf("\n");
+
+    return 0;*/
 }
