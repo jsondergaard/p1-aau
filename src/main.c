@@ -13,45 +13,27 @@ void PickDate(void);
 
 int main(int argc, char **argv)
 {
-	int c;
+	char c;
 
 	printf(YELLOW "Good day! What do you want to do?\n" RESET);
 	do
 	{
-		system("clear");
-
 		printMenu();
 
-		system("/bin/stty raw");
-		char c = getchar();
-		system("/bin/stty cooked");
+		scanf(" %s", &c);
 
-		switch (c)
-		{
-		case 'c':
+		if (c == 'c')
 			viewCalendar();
-			break;
-
-		case 'a':
+		else if (c == 'a')
 			printf("Add new assignment\n");
-			break;
-
-		case 't':
+		else if (c == 't')
 			assignmentList();
-			break;
-
-		case 'd':
+		else if (c == 'd')
 			PickDate();
-			break;
-
-		case 'q':
+		else if (c == 'q')
 			exit(1);
-			break;
-
-		default:
-			printf("Unrecognized command.\n");
-			break;
-		}
+		else
+			printf("Unknown command %s.", &c);
 	} while (c != 'q');
 
 	return 1;
