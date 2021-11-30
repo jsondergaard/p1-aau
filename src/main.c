@@ -9,6 +9,7 @@
 void printMenu(void);
 int assignmentList(void);
 int callback(void *, int, char **, char **);
+void PickDate (void);
 
 int main(int argc, char **argv)
 {

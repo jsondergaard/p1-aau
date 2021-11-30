@@ -40,3 +40,11 @@ void viewCalendar(void)
 	}
 	printf("\n_________________________________________________________\n");
 }
+
+void PickDate (void){
+
+    for (int i = 0; i < 24; ++i) {
+        printf("|\t\t|\n");
+    }
+
+}
