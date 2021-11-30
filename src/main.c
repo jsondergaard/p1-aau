@@ -3,13 +3,14 @@
 #include <sqlite3.h>
 #include "defines.h"
 #include "calendar.h"
+#include "assignment.h"
 
 #define kBUFFERSIZE 4096 // How many bytes to read at a time
 
 void printMenu(void);
 int assignmentList(void);
 int callback(void *, int, char **, char **);
-void PickDate (void);
+void PickDate(void);
 
 int main(int argc, char **argv)
 {
@@ -30,7 +31,7 @@ int main(int argc, char **argv)
 			break;
 
 		case 'a':
-			printf("Add new assignment\n");
+			addAssignment();
 			break;
 
 		case 't':
@@ -40,9 +41,9 @@ int main(int argc, char **argv)
 		case 'q':
 			break;
 
-        case 'd':
-            PickDate();
-            break;
+		case 'd':
+			PickDate();
+			break;
 
 		default:
 			printf("Unrecognized command.\n");
@@ -59,7 +60,7 @@ void printMenu(void)
 	printf("Press a to add a new assignment.\n");
 	printf("Press q to quit.\n");
 #ifndef NDEBUG
-	printf("DEBUG: t – List of assigments.\n");
+	printf("DEBUG: t – List of assignments.\n");
 #endif
 }
 

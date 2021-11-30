@@ -329,6 +329,7 @@ add_library(sqlite SHARED
 if (NOT DEFINED TEST)
 	add_executable(main
 		src/main.c
+		src/assignment.c
 		src/calendar.c
  		${header_files}
  	)
