@@ -13,9 +13,6 @@ set (My_Project_Version_Major 0)
 set (My_Project_Version_Minor 1)
 set (My_Project_Version_Patch 0)
 
-#set(SQLite3_INCLUDE_DIR "./lib/sqlite-337")
-#set(SQLite3_LIBRARY "./lib/sqlite-337/bin")
-
 set (My_Project_Version "${My_Project_Version_Major}.${My_Project_Version_Minor}.${My_Project_Version_Patch}")
 
 set (My_Project_Copyright_Date "2021-2022")
@@ -26,6 +23,8 @@ string(REGEX REPLACE " " "_" My_Project_Title_Caps ${My_Project_Title_Caps} )
 
 project (${My_Project_Title})
 
+
+# SQLite 3
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/sqlite3/)
 set(sqlite3_srcs 
   ${CMAKE_CURRENT_SOURCE_DIR}/lib/sqlite3/sqlite3.c
