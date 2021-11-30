@@ -45,6 +45,7 @@ void printMenu(void)
 	printf("Press c to view your calendar.\n");
 	printf("Press a to add a new assignment.\n");
 	printf("Press q to quit.\n");
+	printf("Press d to view a specific date.\n");
 #ifndef NDEBUG
 	printf("DEBUG: t – List of assigments.\n");
 #endif
