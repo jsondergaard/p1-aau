@@ -42,6 +42,7 @@ int main(int argc, char **argv)
 
         case 'd':
             PickDate();
+            break;
 
 		default:
 			printf("Unrecognized command.\n");
