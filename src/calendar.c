@@ -17,10 +17,13 @@ int viewCalendar(void)
 
 	do
 	{
-		printf("Press c to print calendar again\n");
-		printf("Press d to view a specific date\n");
-		printf("Press t to test output\n");
-		printf("Press m to return to menu\n");
+		printf(YELLOW "*************************\n" RESET);
+		printf(YELLOW "********" RESET " Calendar " YELLOW "*******\n" RESET);
+		printf(YELLOW "*************************\n" RESET);
+		printf(RED "* " RESET "Press " RED "c" RESET " to print calendar again\n");
+		printf(RED "* " RESET "Press " RED "d" RESET " to view a specific date\n");
+		printf(RED "* " RESET "Press " RED "t" RESET " to test output\n");
+		printf(RED "* " RESET "Press " RED "m" RESET " to return to menu\n");
 
 		scanf(" %s", &c);
 
@@ -56,7 +59,6 @@ void printCalendar(void)
 		}
 	}
 	printf("\n_________________________________________________________\n");
-	printf("\\n");
 }
 
 void viewDate(void)

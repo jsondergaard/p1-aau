@@ -12,7 +12,6 @@ int main(int argc, char **argv)
 {
 	char c;
 
-	printf(YELLOW "Good day! What do you want to do?\n" RESET);
 	do
 	{
 		printMenu();
@@ -34,7 +33,10 @@ int main(int argc, char **argv)
 
 void printMenu(void)
 {
-	printf("Press c to view your calendar.\n");
-	printf("Press a to manage assignments.\n");
-	printf("Press q to quit.\n");
+	printf(YELLOW "*************************\n" RESET);
+	printf(YELLOW "*******" RESET " Main Menu " YELLOW "*******\n" RESET);
+	printf(YELLOW "*************************\n" RESET);
+	printf(RED "* " RESET "Press " RED "c" RESET " to view your calendar.\n");
+	printf(RED "* " RESET "Press " RED "a" RESET " to manage assignments.\n");
+	printf(RED "* " RESET "Press " RED "q" RESET " to quit.\n");
 }

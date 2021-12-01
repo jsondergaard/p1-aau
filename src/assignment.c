@@ -14,9 +14,12 @@ int assignmentMenu(void)
 
 	do
 	{
-		printf("Press " RED "a" RESET " to add an assignment\n");
-		printf("Press " RED "l" RESET " to list all assignments\n");
-		printf("Press " RED "m" RESET " to return to menu\n");
+		printf(YELLOW "*************************\n" RESET);
+		printf(YELLOW "******" RESET " Assignments " YELLOW "******\n" RESET);
+		printf(YELLOW "*************************\n" RESET);
+		printf(RED "* " RESET "Press " RED "a" RESET " to add an assignment\n");
+		printf(RED "* " RESET "Press " RED "l" RESET " to list all assignments\n");
+		printf(RED "* " RESET "Press " RED "m" RESET " to return to menu\n");
 
 		scanf(" %s", &c);
 
