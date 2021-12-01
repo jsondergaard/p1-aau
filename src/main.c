@@ -24,8 +24,6 @@ int main(int argc, char **argv)
 			viewCalendar();
 		else if (c == 'a')
 			assignmentMenu();
-		else if (c == 'd')
-			PickDate();
 		else if (c == 'q')
 			exit(1);
 		else
