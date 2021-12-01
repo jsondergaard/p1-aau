@@ -11,6 +11,14 @@ void printMenu(void);
 int main(int argc, char **argv)
 {
 	char c;
+	printf("    .      *    *           *.       *   .                      *     .\n");
+	printf("               .   .                   __   *    .     * .     *\n");
+	printf("    *       *         *   .     .    _|__|_        *    __   .       *\n");
+	printf("  .  *  /\\       /\\          *        ('')    *       _|__|_     .\n");
+	printf("       /  \\   * /  \\  *          .  <( . )> *  .       ('')   *   *\n");
+	printf("  *    /  \\     /  \\   .   *       _(__.__)_  _   ,--<(  . )>  .    .\n");
+	printf("      /    \\   /    \\          *   |       |  )),`   (   .  )     *\n");
+	printf("    *   `||` ..  `||` .*.... == == == == == = '`   ... ' --`-` ... * jb.\n\n");
 
 	do
 	{
@@ -25,7 +33,22 @@ int main(int argc, char **argv)
 		else if (c == 'q')
 			exit(1);
 		else
-			printf("Unknown command %s.\n", &c);
+		{
+			printf("      ,___          .-;'\n");
+			printf("       `\"-.`\\_...._/`.`\n");
+			printf("    ,      \\        /\n");
+			printf(" .-' ',    / ()   ()\\\n");
+			printf("`'._   \\  /()    .  (|\n");
+			printf("    > .' ;,     -'-  /\n");
+			printf("   / <   |;,     __.;\n");
+			printf("   '-.'-.|  , \\    , \\\n");
+			printf("      `>.|;, \\_)    \\_)\n");
+			printf("       `-;     ,    /\n");
+			printf("          \\    /   <\n");
+			printf("           '. <`'-,_)\n");
+			printf("        jgs '._)\n\n");
+			printf("You made Pikachu confused with your command \"%s\".\n\n", &c);
+		}
 	} while (c != 'q');
 
 	return 1;
@@ -33,15 +56,6 @@ int main(int argc, char **argv)
 
 void printMenu(void)
 {
-	printf("    .      *    *           *.       *   .                      *     .\n");
-	printf("               .   .                   __   *    .     * .     *\n");
-	printf("    *       *         *   .     .    _|__|_        *    __   .       *\n");
-	printf("  .  *  /\\       /\\          *        ('')    *       _|__|_     .\n");
-	printf("       /  \\   * /  \\  *          .  <( . )> *  .       ('')   *   *\n");
-	printf("  *    /  \\     /  \\   .   *       _(__.__)_  _   ,--<(  . )>  .    .\n");
-	printf("      /    \\   /    \\          *   |       |  )),`   (   .  )     *\n");
-	printf("    *   `||` ..  `||` .*.... == == == == == = '`   ... ' --`-` ... * jb.\n\n");
-
 	printf(YELLOW "*************************\n" RESET);
 	printf(YELLOW "*******" RESET " Main Menu " YELLOW "*******\n" RESET);
 	printf(YELLOW "*************************\n" RESET);
