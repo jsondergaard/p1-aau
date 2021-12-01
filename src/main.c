@@ -33,6 +33,15 @@ int main(int argc, char **argv)
 
 void printMenu(void)
 {
+	printf("    .      *    *           *.       *   .                      *     .\n");
+	printf("               .   .                   __   *    .     * .     *\n");
+	printf("    *       *         *   .     .    _|__|_        *    __   .       *\n");
+	printf("  .  *  /\\       /\\          *        ('')    *       _|__|_     .\n");
+	printf("       /  \\   * /  \\  *          .  <( . )> *  .       ('')   *   *\n");
+	printf("  *    /  \\     /  \\   .   *       _(__.__)_  _   ,--<(  . )>  .    .\n");
+	printf("      /    \\   /    \\          *   |       |  )),`   (   .  )     *\n");
+	printf("    *   `||` ..  `||` .*.... == == == == == = '`   ... ' --`-` ... * jb.\n\n");
+
 	printf(YELLOW "*************************\n" RESET);
 	printf(YELLOW "*******" RESET " Main Menu " YELLOW "*******\n" RESET);
 	printf(YELLOW "*************************\n" RESET);
