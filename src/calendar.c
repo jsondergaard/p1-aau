@@ -7,6 +7,7 @@
 
 int callback(void *, int, char **, char **);
 void printCalendar(void);
+void viewDate(void);
 
 int viewCalendar(void)
 {
@@ -17,6 +18,7 @@ int viewCalendar(void)
 	do
 	{
 		printf("Press c to print calendar again\n");
+		printf("Press d to view a specific date\n");
 		printf("Press t to test output\n");
 		printf("Press m to return to menu\n");
 
@@ -24,6 +26,8 @@ int viewCalendar(void)
 
 		if (c == 't')
 			printf(RED "Test output\n" RESET);
+		else if (c == 'd')
+			viewDate();
 		else if (c == 'c')
 			printCalendar();
 	} while (c != 'm');
@@ -55,7 +59,7 @@ void printCalendar(void)
 	printf("\\n");
 }
 
-void PickDate(void)
+void viewDate(void)
 {
 	/*sqlite3 *db;
 	char *error = 0;
