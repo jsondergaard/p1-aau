@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <time.h>
+#include <sqlite3.h>
 #include "defines.h"
 
 int addAssignment(void);
