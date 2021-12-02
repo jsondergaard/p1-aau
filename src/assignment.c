@@ -66,7 +66,7 @@ int addAssignment(void)
 #endif
 
 	printf("When is the assignment due? (YYYY-MM-DD HH:SS) > ");
-	scanf(" %s", &dueDate);
+	scanf(" %[^\n]", &dueDate);
 	printf("\n");
 
 #ifndef NDEBUG
