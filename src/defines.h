@@ -1,3 +1,5 @@
+#define DBFILE "../database.db"
+
 #define YELLOW "\x1b[33m"
 #define RED "\x1b[31m"
 #define GREEN "\x1b[32m"

@@ -66,7 +66,7 @@ void viewDate(void)
 	/*sqlite3 *db;
 	char *error = 0;
 
-	int rc = sqlite3_open("../database.db", &db);
+	int rc = sqlite3_open(DBFILE, &db);
 	if (rc != SQLITE_OK)
 	{
 		fprintf(stderr, "Cannot open database: %s\n",
@@ -107,13 +107,7 @@ int callback(void *nil, int argc, char **argv,
 int isLeapYear(int year)
 {
 	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
-	{
-		// It is a leap year and February has 29 days.
-		return 1;
-	}
+		return 1; // It is a leap year and February has 29 days.
 	else
-	{
-		// It is not a leap year, so February has 28 days.
-		return 0;
-	}
+		return 0; // It is not a leap year, so February has 28 days.
 }

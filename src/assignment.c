@@ -37,6 +37,21 @@ int addAssignment(void)
 	char title[256];
 	char dueDate[256];
 
+	sqlite3 *db;
+	sqlite3_stmt *res;
+	char *error = 0;
+
+	int rc = sqlite3_open(DBFILE, &db);
+
+	if (rc != SQLITE_OK)
+	{
+		fprintf(stderr, "Cannot open database: %s\n",
+				sqlite3_errmsg(db));
+		sqlite3_close(db);
+
+		return 1;
+	}
+
 	printf(YELLOW "Add assignment\n" RESET);
 
 	printf("What do you want the assignment to be called? > ");
@@ -54,6 +69,30 @@ int addAssignment(void)
 #ifndef NDEBUG
 	printf("Due date: %s\n", dueDate);
 #endif
+	/*
+		char *sql = "INSERT INTO assignments(name, due_at, created_at) VALUES(@title, @dueDate, @timeNow);";
+		rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
+		if (rc == SQLITE_OK)
+		{
+			sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@title"), title);
+			sqlite3_bind_int(res, sqlite3_bind_parameter_index(res, "@dueDate"), dueDate);
+			sqlite3_bind_int(res, sqlite3_bind_parameter_index(res, "@id"), (unsigned)time(NULL));
+		}
+
+		if (rc != SQLITE_OK)
+		{
+			fprintf(stderr, "Failed to create assignment\n");
+			fprintf(stderr, "SQL error: %s\n", error);
+
+			sqlite3_free(error);
+			sqlite3_close(db);
+
+			return 1;
+		}
+
+		sqlite3_finalize(res);
+		sqlite3_close(db);
+		*/
 }
 
 int listAssignments(void)
@@ -61,7 +100,7 @@ int listAssignments(void)
 	sqlite3 *db;
 	char *error = 0;
 
-	int rc = sqlite3_open("../database.db", &db);
+	int rc = sqlite3_open(DBFILE, &db);
 
 	if (rc != SQLITE_OK)
 	{
