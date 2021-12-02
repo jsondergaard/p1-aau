@@ -65,7 +65,7 @@ int addAssignment(void)
 	printf("Assignment name: %s\n", title);
 #endif
 
-	printf("When is the assignment due? (YYYY-MM-DD HH:SS) > ");
+	printf("When is the assignment due? (YYYY-MM-DD HH:MM) > ");
 	scanf(" %[^\n]", &dueDate);
 	printf("\n");
 
