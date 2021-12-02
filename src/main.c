@@ -11,14 +11,6 @@ void printMenu(void);
 int main(int argc, char **argv)
 {
 	char c;
-	printf("    .      *    *           *.       *   .                      *     .\n");
-	printf("               .   .                   __   *    .     * .     *\n");
-	printf("    *       *         *   .     .    _|__|_        *    __   .       *\n");
-	printf("  .  *  /\\       /\\          *        ('')    *       _|__|_     .\n");
-	printf("       /  \\   * /  \\  *          .  <( . )> *  .       ('')   *   *\n");
-	printf("  *    /  \\     /  \\   .   *       _(__.__)_  _   ,--<(  . )>  .    .\n");
-	printf("      /    \\   /    \\          *   |       |  )),`   (   .  )     *\n");
-	printf("    *   `||` ..  `||` .*.... == == == == == = '`   ... ' --`-` ... * jb.\n\n");
 
 	do
 	{
@@ -33,22 +25,7 @@ int main(int argc, char **argv)
 		else if (c == 'q')
 			exit(1);
 		else
-		{
-			printf("      ,___          .-;'\n");
-			printf("       `\"-.`\\_...._/`.`\n");
-			printf("    ,      \\        /\n");
-			printf(" .-' ',    / ()   ()\\\n");
-			printf("`'._   \\  /()    .  (|\n");
-			printf("    > .' ;,     -'-  /\n");
-			printf("   / <   |;,     __.;\n");
-			printf("   '-.'-.|  , \\    , \\\n");
-			printf("      `>.|;, \\_)    \\_)\n");
-			printf("       `-;     ,    /\n");
-			printf("          \\    /   <\n");
-			printf("           '. <`'-,_)\n");
-			printf("        jgs '._)\n\n");
-			printf("You made Pikachu confused with your command \"%s\".\n\n", &c);
-		}
+			printf("Unknown command: %s\n", &c);
 	} while (c != 'q');
 
 	return 1;
@@ -56,10 +33,12 @@ int main(int argc, char **argv)
 
 void printMenu(void)
 {
-	printf(YELLOW "*************************\n" RESET);
-	printf(YELLOW "*******" RESET " Main Menu " YELLOW "*******\n" RESET);
-	printf(YELLOW "*************************\n" RESET);
+#if __APPLE__
+	system("clear");
+#endif
+	printf(YELLOW "\tMain Menu\n" RESET);
 	printf(RED "* " RESET "Press " RED "c" RESET " to view your calendar.\n");
 	printf(RED "* " RESET "Press " RED "a" RESET " to manage assignments.\n");
 	printf(RED "* " RESET "Press " RED "q" RESET " to quit.\n");
+	printf(GREEN "> " RESET);
 }

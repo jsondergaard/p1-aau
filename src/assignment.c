@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stddef.h>
 #include <time.h>
 #include <sqlite3.h>
@@ -14,12 +15,14 @@ int assignmentMenu(void)
 
 	do
 	{
-		printf(YELLOW "*************************\n" RESET);
-		printf(YELLOW "******" RESET " Assignments " YELLOW "******\n" RESET);
-		printf(YELLOW "*************************\n" RESET);
+#if __APPLE__
+		system("clear");
+#endif
+		printf(YELLOW "\tAssignments\n" RESET);
 		printf(RED "* " RESET "Press " RED "a" RESET " to add an assignment\n");
 		printf(RED "* " RESET "Press " RED "l" RESET " to list all assignments\n");
 		printf(RED "* " RESET "Press " RED "m" RESET " to return to menu\n");
+		printf(GREEN "> " RESET);
 
 		scanf(" %s", &c);
 
@@ -93,6 +96,12 @@ int addAssignment(void)
 		sqlite3_finalize(res);
 		sqlite3_close(db);
 		*/
+
+	printf("Press ENTER to continue..\n");
+	fflush(stdin);
+	getchar();
+
+	return 1;
 }
 
 int listAssignments(void)
@@ -130,6 +139,10 @@ int listAssignments(void)
 	}
 
 	sqlite3_close(db);
+
+	printf("Press ENTER to continue..\n");
+	fflush(stdin);
+	getchar();
 
 	return 1;
 }
