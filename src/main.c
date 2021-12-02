@@ -16,7 +16,8 @@ int main(int argc, char **argv)
 	{
 		printMenu();
 
-		scanf(" %s", &c);
+		fflush(stdin);
+		c = getchar();
 
 		if (c == 'c')
 			viewCalendar();
