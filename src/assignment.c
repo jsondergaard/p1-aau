@@ -54,14 +54,7 @@ int addAssignment(void)
 
 	int rc = sqlite3_open(DBFILE, &db);
 
-	if (rc != SQLITE_OK)
-	{
-		fprintf(stderr, "Cannot open database: %s\n",
-				sqlite3_errmsg(db));
-		sqlite3_close(db);
-
-		return 1;
-	}
+	ERRCHECK
 
 	printf(YELLOW "Add assignment\n" RESET);
 
@@ -84,15 +77,7 @@ int addAssignment(void)
 		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@timeNow"), timeString, sizeof(timeString), SQLITE_STATIC);
 	}
 
-	if (rc != SQLITE_OK)
-	{
-		fprintf(stderr, "SQL error: %s\n", error);
-
-		sqlite3_free(error);
-		sqlite3_close(db);
-
-		return 1;
-	}
+	ERRCHECK
 
 	rc = sqlite3_step(res);
 	if (rc == SQLITE_DONE)
@@ -117,32 +102,15 @@ int listAssignments(void)
 
 	int rc = sqlite3_open(DBFILE, &db);
 
-	if (rc != SQLITE_OK)
-	{
-		fprintf(stderr, "Cannot open database: %s\n",
-				sqlite3_errmsg(db));
-		sqlite3_close(db);
-
-		return 1;
-	}
+	ERRCHECK
 
 	printf("List of assignments:\n");
 
-	char *sql = "SELECT * FROM assignments";
+	char *sql = "SELECT * FROM assignments ORDER BY due_at";
 
 	rc = sqlite3_exec(db, sql, callback, 0, &error);
 
-	if (rc != SQLITE_OK)
-	{
-
-		fprintf(stderr, "Failed to select data\n");
-		fprintf(stderr, "SQL error: %s\n", error);
-
-		sqlite3_free(error);
-		sqlite3_close(db);
-
-		return 1;
-	}
+	ERRCHECK
 
 	sqlite3_close(db);
 
@@ -158,7 +126,7 @@ int callback(void *nil, int argc, char **argv,
 {
 	nil = 0;
 
-	for (int i = 0; i < argc; i++)
+	for (int i = 1; i < argc; i++)
 		printf("%s = %s\n", column[i], argv[i] ? argv[i] : "NULL");
 
 	printf("\n");
