@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <string.h>
 #include <time.h>
 #include <sqlite3.h>
 #include "defines.h"
@@ -37,8 +38,15 @@ int assignmentMenu(void)
 
 int addAssignment(void)
 {
-	char title[256];
-	char dueDate[256];
+	char title[128];
+	char dueDate[64];
+
+	time_t rawtime;
+	struct tm *info;
+	char timeString[64];
+
+	time(&rawtime);
+	strftime(timeString, 64, "%Y-%m-%d %H:%M:%S", localtime(&rawtime));
 
 	sqlite3 *db;
 	sqlite3_stmt *res;
@@ -57,45 +65,44 @@ int addAssignment(void)
 
 	printf(YELLOW "Add assignment\n" RESET);
 
-	printf("What do you want the assignment to be called? > ");
-	scanf(" %s", &title);
+	printf("What do you want the assignment to be called?\n> ");
+	scanf(" %s", &title[0]);
 	printf("\n");
 
-#ifndef NDEBUG
-	printf("Assignment name: %s\n", title);
-#endif
-
-	printf("When is the assignment due? (YYYY-MM-DD HH:MM) > ");
-	scanf(" %[^\n]", &dueDate);
+	printf("When is the assignment due? (YYYY-MM-DD HH:MM:SS)\n> ");
+	scanf(" %[^\n]", &dueDate[0]);
 	printf("\n");
 
-#ifndef NDEBUG
-	printf("Due date: %s\n", dueDate);
-#endif
-	/*
-		char *sql = "INSERT INTO assignments(name, due_at, created_at) VALUES(@title, @dueDate, @timeNow);";
-		rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
-		if (rc == SQLITE_OK)
-		{
-			sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@title"), title);
-			sqlite3_bind_int(res, sqlite3_bind_parameter_index(res, "@dueDate"), dueDate);
-			sqlite3_bind_int(res, sqlite3_bind_parameter_index(res, "@id"), (unsigned)time(NULL));
-		}
+	printf("Inserting: %s (due at %s, created at %s)\n", title, dueDate, timeString);
 
-		if (rc != SQLITE_OK)
-		{
-			fprintf(stderr, "Failed to create assignment\n");
-			fprintf(stderr, "SQL error: %s\n", error);
+	char *sql = "INSERT INTO assignments(name, due_at, created_at) VALUES(@title, @dueDate, @timeNow);";
+	rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
+	if (rc == SQLITE_OK)
+	{
+		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@title"), title, strlen(title), SQLITE_STATIC);
+		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@dueDate"), dueDate, strlen(title), SQLITE_STATIC);
+		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@timeNow"), timeString, strlen(title), SQLITE_STATIC);
+	}
 
-			sqlite3_free(error);
-			sqlite3_close(db);
+	if (rc != SQLITE_OK)
+	{
+		fprintf(stderr, "Failed to create assignment\n");
+		fprintf(stderr, "SQL error: %s\n", error);
 
-			return 1;
-		}
-
-		sqlite3_finalize(res);
+		sqlite3_free(error);
 		sqlite3_close(db);
-		*/
+
+		return 1;
+	}
+
+	rc = sqlite3_step(res);
+	if (rc == SQLITE_OK)
+		printf(GREEN "Successfully created assignment.\n" RESET);
+	else if (rc != SQLITE_OK)
+		printf(RED "Failed to create assignment.\n" RESET);
+
+	sqlite3_finalize(res);
+	sqlite3_close(db);
 
 	printf("Press ENTER to continue..\n");
 	fflush(stdin);
@@ -150,13 +157,10 @@ int listAssignments(void)
 int callback(void *nil, int argc, char **argv,
 			 char **column)
 {
-
 	nil = 0;
 
 	for (int i = 0; i < argc; i++)
-	{
 		printf("%s = %s\n", column[i], argv[i] ? argv[i] : "NULL");
-	}
 
 	printf("\n");
 
