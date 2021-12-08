@@ -79,14 +79,13 @@ int addAssignment(void)
 	rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
 	if (rc == SQLITE_OK)
 	{
-		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@title"), title, strlen(title), SQLITE_STATIC);
-		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@dueDate"), dueDate, strlen(title), SQLITE_STATIC);
-		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@timeNow"), timeString, strlen(title), SQLITE_STATIC);
+		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@title"), title, sizeof(title), SQLITE_STATIC);
+		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@dueDate"), dueDate, sizeof(dueDate), SQLITE_STATIC);
+		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@timeNow"), timeString, sizeof(timeString), SQLITE_STATIC);
 	}
 
 	if (rc != SQLITE_OK)
 	{
-		fprintf(stderr, "Failed to create assignment\n");
 		fprintf(stderr, "SQL error: %s\n", error);
 
 		sqlite3_free(error);
@@ -96,9 +95,9 @@ int addAssignment(void)
 	}
 
 	rc = sqlite3_step(res);
-	if (rc == SQLITE_OK)
+	if (rc == SQLITE_DONE)
 		printf(GREEN "Successfully created assignment.\n" RESET);
-	else if (rc != SQLITE_OK)
+	else if (rc != SQLITE_DONE)
 		printf(RED "Failed to create assignment.\n" RESET);
 
 	sqlite3_finalize(res);
