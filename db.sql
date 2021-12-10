@@ -1,13 +1,13 @@
-DROP TABLE IF EXISTS assignments;
+DROP TABLE assignments;
 CREATE TABLE assignments (
-  id int(11) NOT NULL,
-  title varchar(128) NOT NULL,
-  due_at date NOT NULL,
-  buffer_time int(11) NOT NULL,
-  student_time int(11) NOT NULL,
-  created_at date NOT NULL DEFAULT (datetime('now','localtime')),
-  updated_at date NOT NULL DEFAULT (datetime('now','localtime')),
-  PRIMARY KEY (id))
+	id integer PRIMARY KEY,
+	title varchar NOT NULL,
+	due_at datetime NOT NULL,
+	buffer_time integer NOT NULL,
+	student_time integer NOT NULL,
+	created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+ )
 
 --Create before update and after insert triggers:
 -- CREATE TRIGGER UPDATE_ASSIGNMENTS BEFORE UPDATE ON assignments

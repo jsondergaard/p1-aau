@@ -44,6 +44,7 @@ int addAssignment(void)
 	time_t rawtime;
 	struct tm *info;
 	char timeString[64];
+	int studentTime = 0, bufferTime = 0;
 
 	time(&rawtime);
 	strftime(timeString, 64, "%Y-%m-%d %H:%M:%S", localtime(&rawtime));
@@ -61,20 +62,30 @@ int addAssignment(void)
 	printf("What do you want the assignment to be called?\n> ");
 	scanf(" %s", &title[0]);
 	printf("\n");
+	fflush(stdin);
 
 	printf("When is the assignment due? (YYYY-MM-DD HH:MM:SS)\n> ");
 	scanf(" %[^\n]", &dueDate[0]);
 	printf("\n");
 
-	printf("Inserting: %s (due at %s, created at %s)\n", title, dueDate, timeString);
+	printf("How much buffer time should there be? (in hours)\n> ");
+	scanf(" %d", &bufferTime);
+	printf("\n");
 
-	char *sql = "INSERT INTO assignments(name, due_at, created_at) VALUES(@title, @dueDate, @timeNow);";
+	printf("What's the estimated scope of the assignment? (in hours)\n> ");
+	scanf(" %d", &studentTime);
+	printf("\n");
+
+	char *sql = "INSERT INTO assignments(title, due_at, buffer_time, student_time, created_at, updated_at) VALUES(@title, @dueDate, @bufferTime, @studentTime, @createdAt, @updatedAt);";
 	rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
 	if (rc == SQLITE_OK)
 	{
 		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@title"), title, sizeof(title), SQLITE_STATIC);
 		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@dueDate"), dueDate, sizeof(dueDate), SQLITE_STATIC);
-		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@timeNow"), timeString, sizeof(timeString), SQLITE_STATIC);
+		sqlite3_bind_int(res, sqlite3_bind_parameter_index(res, "@bufferTime"), bufferTime);
+		sqlite3_bind_int(res, sqlite3_bind_parameter_index(res, "@studentTime"), studentTime);
+		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@createdAt"), timeString, sizeof(timeString), SQLITE_STATIC);
+		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@updatedAt"), timeString, sizeof(timeString), SQLITE_STATIC);
 	}
 
 	ERRCHECK

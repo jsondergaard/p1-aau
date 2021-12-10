@@ -15,6 +15,5 @@
 		{                                                                          \
 			fprintf(stderr, RED "Database error: %s\n" RESET, sqlite3_errmsg(db)); \
 			sqlite3_close(db);                                                     \
-			return 1;                                                              \
 		}                                                                          \
 	}
