@@ -45,9 +45,6 @@ int assignmentMenu(void)
 
 int addAssignment(void)
 {
-
-	// Day days[31];
-
 	char title[128];
 	char rangeStart[64];
 	char rangeEnd[64];
