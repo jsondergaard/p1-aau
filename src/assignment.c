@@ -98,19 +98,17 @@ int addAssignment(void)
 	scanf(" %d", &studentTime);
 	printf("\n");
 
-	char *sql = "SELECT due_at,student_time FROM assignments WHERE due_at BETWEEN ? AND ?";
+	char *sql = "SELECT due_at,student_time FROM assignments WHERE due_at BETWEEN @start AND @end";
 
 	rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
 	if (rc == SQLITE_OK)
 	{
-		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "?"), rangeStart, sizeof(rangeStart), SQLITE_STATIC);
-		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "?"), rangeEnd, sizeof(rangeEnd), SQLITE_STATIC);
+		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@start"), rangeStart, sizeof(rangeStart), SQLITE_STATIC);
+		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@end"), rangeEnd, sizeof(rangeEnd), SQLITE_STATIC);
 	}
 	ERRCHECK
 
-	rc = sqlite3_step(res);
-
-	while (rc == SQLITE_ROW)
+	while (sqlite3_step(res) != SQLITE_DONE)
 	{
 		int dayGet, dummy;
 		sscanf(sqlite3_column_text(res,0), "%d-%d-%d", &dummy, &dummy, &dayGet);
@@ -123,7 +121,6 @@ int addAssignment(void)
 			printf("%d: %d\n", i, day[i].studentTime);
 		}
 	}
-	
 
 	/*char *sql = "INSERT INTO assignments(title, original_due_at, due_at, buffer_time, student_time, created_at, updated_at) VALUES(@title, @dueDate, @dueDate, @bufferTime, @studentTime, @createdAt, @updatedAt);";
 	rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
