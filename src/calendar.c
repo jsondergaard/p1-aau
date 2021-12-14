@@ -131,7 +131,7 @@ int printMonth(int numberOfDays, int month){
 	printf("\n_________________________________________________________\n");
 	for (int i = 1; i < (numberOfDays + 1); i++)
 	{	
-		if (){
+		if (i = 1){
 
 			printf("|"RED"%d\t"RESET, i);
 		}else {
@@ -154,6 +154,18 @@ int printMonth(int numberOfDays, int month){
 	}else {
 		printf("|\n_________________________________________________________\n");
 	}
+}
+
+int pullMonthFromDB(int month){
+
+	sqlite3 *db;
+	sqlite3_stmt *res;
+	char *error = 0;
+
+	int rc = sqlite3_open(DBFILE, &db);	
+	ERRCHECK
+
+	char * sql = "SELECT due_at FROM assignments WHERE due_at @start AND @end";	
 }
 
 int isLeapYear(int year)
