@@ -131,7 +131,7 @@ int printMonth(int numberOfDays, int month){
 	printf("\n_________________________________________________________\n");
 	for (int i = 1; i < (numberOfDays + 1); i++)
 	{	
-		if (i = 1){
+		if (i == 1){
 
 			printf("|"RED"%d\t"RESET, i);
 		}else {
