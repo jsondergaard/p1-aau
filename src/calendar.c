@@ -8,6 +8,7 @@
 
 int callback(void *, int, char **, char **);
 void printCalendar(int month);
+int printMonth(int numberOfDays,int month);
 
 int viewCalendar(void)
 {
@@ -39,6 +40,12 @@ int viewCalendar(void)
 void printCalendar(int month)
 {
 	int numberOfDays;
+	
+
+	printf("Which month would you like to view? (1, 2, 3, ...)\n");
+	scanf(" %d", &month);
+
+	
 
 	if(month == 2)
 		numberOfDays = 28;
@@ -49,19 +56,104 @@ void printCalendar(int month)
 
 	printf(RED "%d\n" RESET, month);
 
-	for (int i = 1; i < (numberOfDays / 7); i++)
-	{
-		printf("\n_________________________________________________________\n");
-		for (int j = 1; j < 7; j++)
-		{
-			printf("|  %d\t|", j);
-		}
+
+	switch (month){
+		case 1: 
+			printf(CYAN "JANUARY" RESET);
+			printMonth(numberOfDays, month);
+			break;
+
+		case 2: 
+			printf(CYAN "FEBRUARY" RESET);
+			printMonth(numberOfDays, month);
+			break;
+
+		case 3: 
+			printf(CYAN "MARCH" RESET);
+			printMonth(numberOfDays, month);
+			break;
+
+		case 4: 
+			printf(CYAN "APRIL" RESET);
+			printMonth(numberOfDays, month);
+			break;
+
+		case 5: 
+			printf(CYAN "MAY" RESET);
+			printMonth(numberOfDays, month);
+			break;
+			
+		case 6: 
+			printf(CYAN "JUNE" RESET);
+			printMonth(numberOfDays, month);
+			break;
+
+		case 7: 
+			printf(CYAN "JULY" RESET);
+			printMonth(numberOfDays, month);
+			break;
+
+		case 8: 
+			printf(CYAN "AUGUST" RESET);
+			printMonth(numberOfDays, month);
+			break;
+
+		case 9: 
+			printf(CYAN "SEPTEMBER" RESET);
+			printMonth(numberOfDays, month);
+			break;
+
+		case 10: 
+			printf(CYAN "OCTOBER" RESET);
+			printMonth(numberOfDays, month);
+			break;
+
+		case 11: 
+			printf(CYAN "NOVEMBER" RESET);
+			printMonth(numberOfDays, month);
+			break;
+
+		case 12: 
+			printf(CYAN "DECEMBER" RESET);
+			printMonth(numberOfDays, month);
+			break;
+
+		default:
+			printf(RED "The entered month does not exist.\n" RESET);			
 	}
-	printf("\n_________________________________________________________\n");
 
 	printf("Press ENTER to continue..\n");
 	fflush(stdin);
 	getchar();
+}
+
+int printMonth(int numberOfDays, int month){
+	printf("\n_________________________________________________________\n");
+	for (int i = 1; i < (numberOfDays + 1); i++)
+	{	
+		if (){
+
+			printf("|"RED"%d\t"RESET, i);
+		}else {
+			printf("|"GREEN"%d\t"RESET, i);
+		}
+
+
+
+		if(i == 7 || i == 14 || i == 21 || i == 28){
+			printf("|\n");
+			if (month == 2 && i == 28){
+				printf("_________________________________________________________\n");
+				return 0;
+			}
+			printf("_________________________________________________________\n");
+		}
+	}
+	if ( month != 2){
+		printf("|\n_________________\n");
+	}else {
+		printf("|\n_________________________________________________________\n");
+	}
 }
 
 int isLeapYear(int year)
