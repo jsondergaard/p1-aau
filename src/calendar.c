@@ -7,13 +7,16 @@
 #define COLUMNS 7
 
 int callback(void *, int, char **, char **);
+<<<<<<< HEAD
 void printCalendar(void);
+=======
+void printCalendar(int);
+int viewDate(void);
+>>>>>>> 2d3f94cbaa2b8d9a3b563076bafaa22d6856496a
 
 int viewCalendar(void)
 {
 	char c;
-
-	printCalendar();
 
 	do
 	{
@@ -21,7 +24,7 @@ int viewCalendar(void)
 		system("clear");
 #endif
 		printf(YELLOW "\tCalendar\n" RESET);
-		printf(RED "* " RESET "Press " RED "c" RESET " to print calendar again\n");
+		printf(RED "* " RESET "Press " RED "c" RESET " to print calendar\n");
 		printf(RED "* " RESET "Press " RED "d" RESET " to view a specific date\n");
 		printf(RED "* " RESET "Press " RED "t" RESET " to test output\n");
 		printf(RED "* " RESET "Press " RED "m" RESET " to return to menu\n");
@@ -34,30 +37,31 @@ int viewCalendar(void)
 		else if (c == 'd')
 			viewDate();
 		else if (c == 'c')
-			printCalendar();
+			printCalendar(1);
 	} while (c != 'm');
 
 	return 1;
 }
 
-void printCalendar(void)
+void printCalendar(int month)
 {
-	int calendar[ROWS][COLUMNS] = {
-		{1, 2, 3, 4, 5, 6, 7},
-		{8, 9, 10, 11, 12, 13, 14},
-		{15, 16, 17, 18, 19, 20, 21},
-		{22, 23, 24, 25, 26, 27, 28},
-		{29, 30, 31, 0, 0, 0, 0}};
+	int numberOfDays;
 
-	printf(RED "                \t JANUARY \t " RESET "\n");
-	printf(" ");
+	if(month == 2)
+		numberOfDays = 28;
+	else if(month % 2 == 0)
+		numberOfDays = 30;
+	else
+		numberOfDays = 31;
 
-	for (int i = 0; i < ROWS; i++)
+	printf(RED "%d\n" RESET, month);
+
+	for (int i = 1; i < (numberOfDays / 7); i++)
 	{
 		printf("\n_________________________________________________________\n");
-		for (int j = 0; j < COLUMNS; j++)
+		for (int j = 1; j < 7; j++)
 		{
-			printf("|  %d\t|", calendar[i][j]);
+			printf("|  %d\t|", j);
 		}
 	}
 	printf("\n_________________________________________________________\n");
