@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "defines.h"
+#include "assignment.h"
 #include "sqlite3.h"
-
 #define ROWS 5
 #define COLUMNS 7
 
@@ -85,8 +85,10 @@ int viewDate(void)
 	char *sql = "SELECT * FROM assignments";
 	rc = sqlite3_exec(db, sql, callback, 0, &error);
 
+
+	printf("Enter the date you want to view (YYYY-MM-DD)");
 	char date;
-	scanf("%c",date);
+	scanf(" %c", &date);
 	printf("\n_________________\n");
 	for (int i = 0; i < 24; ++i)
 	{
@@ -94,25 +96,6 @@ int viewDate(void)
 		printf("_________________\n");
 	}
 	sqlite3_close(db);
-}
-int callback(void *nil, int argc, char **argv,
-			 char **column)
-{
-
-	nil = 0;
-
-	for (int i = 0; i < argc; i++)
-	{
-		printf("%s = %s\n", column[i], argv[i] ? argv[i] : "NULL");
-	}
-
-	printf("\n");
-
-	return 0;
-
-	printf("Press ENTER to continue..\n");
-	fflush(stdin);
-	getchar();
 }
 
 int isLeapYear(int year)
