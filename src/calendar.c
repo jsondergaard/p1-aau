@@ -8,7 +8,7 @@
 
 int callback(void *, int, char **, char **);
 void printCalendar(void);
-void viewDate(void);
+int viewDate(void);
 
 int viewCalendar(void)
 {
@@ -68,9 +68,9 @@ void printCalendar(void)
 	getchar();
 }
 
-void viewDate(void)
+int viewDate(void)
 {
-	/*sqlite3 *db;
+	sqlite3 *db;
 	char *error = 0;
 
 	int rc = sqlite3_open(DBFILE, &db);
@@ -86,14 +86,14 @@ void viewDate(void)
 	rc = sqlite3_exec(db, sql, callback, 0, &error);
 
 	char date;
-	scanf("%c",date);*/
+	scanf("%c",date);
 	printf("\n_________________\n");
 	for (int i = 0; i < 24; ++i)
 	{
 		printf("%d: |\t'Empty'\t|\n", i);
 		printf("_________________\n");
 	}
-	/*sqlite3_close(db);
+	sqlite3_close(db);
 }
 int callback(void *nil, int argc, char **argv,
 			 char **column)
@@ -108,7 +108,7 @@ int callback(void *nil, int argc, char **argv,
 
 	printf("\n");
 
-	return 0;*/
+	return 0;
 
 	printf("Press ENTER to continue..\n");
 	fflush(stdin);
