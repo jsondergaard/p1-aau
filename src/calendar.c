@@ -50,7 +50,7 @@ void printCalendar(void)
 		{22, 23, 24, 25, 26, 27, 28},
 		{29, 30, 31, 0, 0, 0, 0}};
 
-	printf(RED "                \t JANUAR \t " RESET "\n");
+	printf(RED "                \t JANUARY \t " RESET "\n");
 	printf(" ");
 
 	for (int i = 0; i < ROWS; i++)
