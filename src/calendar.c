@@ -7,12 +7,7 @@
 #define COLUMNS 7
 
 int callback(void *, int, char **, char **);
-<<<<<<< HEAD
-void printCalendar(void);
-=======
-void printCalendar(int);
-int viewDate(void);
->>>>>>> 2d3f94cbaa2b8d9a3b563076bafaa22d6856496a
+void printCalendar(int month);
 
 int viewCalendar(void)
 {
@@ -34,8 +29,6 @@ int viewCalendar(void)
 
 		if (c == 't')
 			printf(RED "Test output\n" RESET);
-		else if (c == 'd')
-			viewDate();
 		else if (c == 'c')
 			printCalendar(1);
 	} while (c != 'm');
