@@ -27,7 +27,6 @@ int viewCalendar(void)
 #endif
 		printf(YELLOW "\tCalendar\n" RESET);
 		printf(RED "* " RESET "Press " RED "c" RESET " to print calendar\n");
-		printf(RED "* " RESET "Press " RED "d" RESET " to view a specific date\n");
 		printf(RED "* " RESET "Press " RED "t" RESET " to test output\n");
 		printf(RED "* " RESET "Press " RED "m" RESET " to return to menu\n");
 		printf(GREEN "> " RESET);
