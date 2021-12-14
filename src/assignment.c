@@ -6,6 +6,13 @@
 #include <sqlite3.h>
 #include "defines.h"
 
+typedef struct{
+
+	int day;
+	int studentTime;
+
+}Day;
+
 int addAssignment(void);
 int listAssignments(void);
 int callback(void *, int, char **, char **);
@@ -38,14 +45,24 @@ int assignmentMenu(void)
 
 int addAssignment(void)
 {
+
+	Day day[31];
+
 	char title[128];
-	char dueDate[64];
+	char rangeStart[64];
+	char rangeEnd[64];
 	char dueDateTime[64];
 
 	time_t rawtime;
 	struct tm *info;
 	char timeString[64];
-	int studentTime = 0, bufferTime = 0;
+	int studentTime = 0;
+
+	for (int i = 1; i <= 31; i++)
+	{
+		day[i].day = i;
+		day[i].studentTime = 0;
+	}
 
 	time(&rawtime);
 	strftime(timeString, 64, "%Y-%m-%d %H:%M:%S", localtime(&rawtime));
@@ -65,43 +82,50 @@ int addAssignment(void)
 	printf("\n");
 	fflush(stdin);
 
+	printf("When shall the assignment be released? (YYYY-MM-DD)\n> ");
+	scanf(" %[^\n]", &rangeStart[0]);
+	printf("\n");
+
 	printf("When is the assignment due? (YYYY-MM-DD)\n> ");
-	scanf(" %[^\n]", &dueDate[0]);
+	scanf(" %[^\n]", &rangeEnd[0]);
 	printf("\n");
 
 	printf("When is the assignment due at the specific day? (HH:MM:SS)\n> ");
 	scanf(" %[^\n]", &dueDateTime[0]);
 	printf("\n");
 
-	printf("How much buffer time should there be? (in days)\n> ");
-	scanf(" %d", &bufferTime);
-	printf("\n");
-
 	printf("What's the estimated scope of the assignment? (in hours)\n> ");
 	scanf(" %d", &studentTime);
 	printf("\n");
 
-	/* char bestDate;
-	int bestDateStudyHours = 0;
+	char *sql = "SELECT due_at,student_time FROM assignments WHERE due_at BETWEEN ? AND ?";
 
-	for(int i = 0; floor(bufferTime/12);i++){
-		char *sql = "SELECT student_time FROM assignments WHERE due_at = ?";
-		rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
-		if (rc == SQLITE_OK){
-			sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "?"), dueDate, sizeof(dueDate), SQLITE_STATIC);
+	rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
+	if (rc == SQLITE_OK)
+	{
+		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "?"), rangeStart, sizeof(rangeStart), SQLITE_STATIC);
+		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "?"), rangeEnd, sizeof(rangeEnd), SQLITE_STATIC);
+	}
+	ERRCHECK
+
+	rc = sqlite3_step(res);
+
+	while (rc == SQLITE_ROW)
+	{
+		int dayGet, dummy;
+		sscanf(sqlite3_column_text(res,0), "%d-%d-%d", &dummy, &dummy, &dayGet);
+		day[dayGet].studentTime+=sqlite3_column_int(res,1);
+	}
+
+	for (int i = 1; i <= 31; i++)
+	{
+		if(day[i].studentTime > 0){
+			printf("%d: %d\n", i, day[i].studentTime);
 		}
-		ERRCHECK
+	}
+	
 
-		rc = sqlite3_step(res);
-		if(rc == SQLITE_ROW){
-			if(sqlite3_column_text(res,0) < bestDateStudyHours){
-				bestDateStudyHours = sqlite3_column_text(res,o);
-				bestDate = 
-			}
-		}
-	} */
-
-	char *sql = "INSERT INTO assignments(title, original_due_at, due_at, buffer_time, student_time, created_at, updated_at) VALUES(@title, @dueDate, @dueDate, @bufferTime, @studentTime, @createdAt, @updatedAt);";
+	/*char *sql = "INSERT INTO assignments(title, original_due_at, due_at, buffer_time, student_time, created_at, updated_at) VALUES(@title, @dueDate, @dueDate, @bufferTime, @studentTime, @createdAt, @updatedAt);";
 	rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
 	if (rc == SQLITE_OK)
 	{
@@ -120,7 +144,7 @@ int addAssignment(void)
 	if (rc == SQLITE_DONE)
 		printf(GREEN "Successfully created assignment.\n" RESET);
 	else if (rc != SQLITE_DONE)
-		printf(RED "Failed to create assignment.\n" RESET);
+		printf(RED "Failed to create assignment.\n" RESET); */
 
 	sqlite3_finalize(res);
 	sqlite3_close(db);
