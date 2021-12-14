@@ -40,6 +40,7 @@ int addAssignment(void)
 {
 	char title[128];
 	char dueDate[64];
+	char dueDateTime[64];
 
 	time_t rawtime;
 	struct tm *info;
@@ -64,11 +65,15 @@ int addAssignment(void)
 	printf("\n");
 	fflush(stdin);
 
-	printf("When is the assignment due? (YYYY-MM-DD HH:MM:SS)\n> ");
+	printf("When is the assignment due? (YYYY-MM-DD)\n> ");
 	scanf(" %[^\n]", &dueDate[0]);
 	printf("\n");
 
-	printf("How much buffer time should there be? (in hours)\n> ");
+	printf("When is the assignment due at the specific day? (HH:MM:SS)\n> ");
+	scanf(" %[^\n]", &dueDateTime[0]);
+	printf("\n");
+
+	printf("How much buffer time should there be? (in days)\n> ");
 	scanf(" %d", &bufferTime);
 	printf("\n");
 
@@ -76,11 +81,32 @@ int addAssignment(void)
 	scanf(" %d", &studentTime);
 	printf("\n");
 
-	char *sql = "INSERT INTO assignments(title, due_at, buffer_time, student_time, created_at, updated_at) VALUES(@title, @dueDate, @bufferTime, @studentTime, @createdAt, @updatedAt);";
+	/* char bestDate;
+	int bestDateStudyHours = 0;
+
+	for(int i = 0; floor(bufferTime/12);i++){
+		char *sql = "SELECT student_time FROM assignments WHERE due_at = ?";
+		rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
+		if (rc == SQLITE_OK){
+			sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "?"), dueDate, sizeof(dueDate), SQLITE_STATIC);
+		}
+		ERRCHECK
+
+		rc = sqlite3_step(res);
+		if(rc == SQLITE_ROW){
+			if(sqlite3_column_text(res,0) < bestDateStudyHours){
+				bestDateStudyHours = sqlite3_column_text(res,o);
+				bestDate = 
+			}
+		}
+	} */
+
+	char *sql = "INSERT INTO assignments(title, original_due_at, due_at, buffer_time, student_time, created_at, updated_at) VALUES(@title, @dueDate, @dueDate, @bufferTime, @studentTime, @createdAt, @updatedAt);";
 	rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
 	if (rc == SQLITE_OK)
 	{
 		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@title"), title, sizeof(title), SQLITE_STATIC);
+		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@dueDate"), dueDate, sizeof(dueDate), SQLITE_STATIC);
 		sqlite3_bind_text(res, sqlite3_bind_parameter_index(res, "@dueDate"), dueDate, sizeof(dueDate), SQLITE_STATIC);
 		sqlite3_bind_int(res, sqlite3_bind_parameter_index(res, "@bufferTime"), bufferTime);
 		sqlite3_bind_int(res, sqlite3_bind_parameter_index(res, "@studentTime"), studentTime);
