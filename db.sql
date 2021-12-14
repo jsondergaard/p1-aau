@@ -2,7 +2,9 @@ DROP TABLE assignments;
 CREATE TABLE assignments (
 	id integer PRIMARY KEY,
 	title varchar NOT NULL,
-	due_at datetime NOT NULL,
+	original_due_at date NOT NULL,
+	due_at date NOT NULL,
+	due_at_time time NOT NULL,
 	buffer_time integer NOT NULL,
 	student_time integer NOT NULL,
 	created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
