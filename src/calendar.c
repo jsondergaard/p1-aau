@@ -11,7 +11,7 @@ typedef struct {
 
 int callback(void *, int, char **, char **);
 void printCalendar(int month);
-int printMonth(int numberOfDays,int month);
+int printMonth(int numberOfDays,int month, Day * dueAtInfo);
 
 int viewCalendar(void)
 {
@@ -43,7 +43,9 @@ int viewCalendar(void)
 void printCalendar(int month)
 {
 	int numberOfDays;
-	
+	int sqlYear;
+	int sqlMonth;
+	int sqlDay;
 
 	printf("Which month would you like to view? (1, 2, 3, ...)\n");
 	scanf(" %d", &month);
@@ -65,7 +67,7 @@ void printCalendar(int month)
 
 	ERRCHECK
 
-	char *sql = "SELECT due_at,student_time FROM assignments WHERE due_at BETWEEN strftime('%Y', CURRENT_TIMESTAMP)-@month-01 AND strftime('%Y', CURRENT_TIMESTAMP)-@month-31";
+	char *sql = "SELECT due_at FROM assignments WHERE due_at BETWEEN strftime('%Y', CURRENT_TIMESTAMP)-@month-01 AND strftime('%Y', CURRENT_TIMESTAMP)-@month-31";
 
 	rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
 	if (rc == SQLITE_OK)
@@ -75,10 +77,15 @@ void printCalendar(int month)
 
 	ERRCHECK
 
+	Day dueAtInfo[31];
+	char *sqlInfo;
+	int i = 0;
 	while (sqlite3_step(res) != SQLITE_DONE)
 	{
-
-		printf(RED "%s: %d" RESET " student hours, don't pick this\n", sqlite3_column_text(res, 0), sqlite3_column_int(res, 1));
+		sqlInfo = sqlite3_column_text(res, 0);
+		sscanf(sqlInfo, " %d-%d-%d",sqlYear, sqlMonth, sqlDay);
+		dueAtInfo[i].day = sqlDay;
+		i = i + 1;
 	}
 
 	sqlite3_finalize(res);
@@ -86,62 +93,62 @@ void printCalendar(int month)
 	switch (month){
 		case 1: 
 			printf(CYAN "JANUARY" RESET);
-			printMonth(numberOfDays, month);
+			printMonth(numberOfDays, month, dueAtInfo);
 			break;
 
 		case 2: 
 			printf(CYAN "FEBRUARY" RESET);
-			printMonth(numberOfDays, month);
+			printMonth(numberOfDays, month, dueAtInfo);
 			break;
 
 		case 3: 
 			printf(CYAN "MARCH" RESET);
-			printMonth(numberOfDays, month);
+			printMonth(numberOfDays, month, dueAtInfo);
 			break;
 
 		case 4: 
 			printf(CYAN "APRIL" RESET);
-			printMonth(numberOfDays, month);
+			printMonth(numberOfDays, month, dueAtInfo);
 			break;
 
 		case 5: 
 			printf(CYAN "MAY" RESET);
-			printMonth(numberOfDays, month);
+			printMonth(numberOfDays, month, dueAtInfo);
 			break;
 			
 		case 6: 
 			printf(CYAN "JUNE" RESET);
-			printMonth(numberOfDays, month);
+			printMonth(numberOfDays, month, dueAtInfo);
 			break;
 
 		case 7: 
 			printf(CYAN "JULY" RESET);
-			printMonth(numberOfDays, month);
+			printMonth(numberOfDays, month, dueAtInfo);
 			break;
 
 		case 8: 
 			printf(CYAN "AUGUST" RESET);
-			printMonth(numberOfDays, month);
+			printMonth(numberOfDays, month, dueAtInfo);
 			break;
 
 		case 9: 
 			printf(CYAN "SEPTEMBER" RESET);
-			printMonth(numberOfDays, month);
+			printMonth(numberOfDays, month, dueAtInfo);
 			break;
 
 		case 10: 
 			printf(CYAN "OCTOBER" RESET);
-			printMonth(numberOfDays, month);
+			printMonth(numberOfDays, month, dueAtInfo);
 			break;
 
 		case 11: 
 			printf(CYAN "NOVEMBER" RESET);
-			printMonth(numberOfDays, month);
+			printMonth(numberOfDays, month, dueAtInfo);
 			break;
 
 		case 12: 
 			printf(CYAN "DECEMBER" RESET);
-			printMonth(numberOfDays, month);
+			printMonth(numberOfDays, month, dueAtInfo);
 			break;
 
 		default:
@@ -153,11 +160,11 @@ void printCalendar(int month)
 	getchar();
 }
 
-int printMonth(int numberOfDays, int month){
+int printMonth(int numberOfDays, int month, Day * dueAtInfo){
 	printf("\n_________________________________________________________\n");
 	for (int i = 1; i < (numberOfDays + 1); i++)
 	{	
-		if (i == 1){
+		if (i == dueAtInfo[i].day){
 
 			printf("|"RED"%d\t"RESET, i);
 		}else {
@@ -182,17 +189,6 @@ int printMonth(int numberOfDays, int month){
 	}
 }
 
-int pullMonthFromDB(int month){
-
-	sqlite3 *db;
-	sqlite3_stmt *res;
-	char *error = 0;
-
-	int rc = sqlite3_open(DBFILE, &db);	
-	ERRCHECK
-
-	char * sql = "SELECT due_at FROM assignments WHERE due_at @start AND @end";	
-}
 
 int isLeapYear(int year)
 {
