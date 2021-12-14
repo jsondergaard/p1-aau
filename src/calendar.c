@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
 #include "defines.h"
 #include "assignment.h"
@@ -86,11 +85,8 @@ void printCalendar(void)
 	int i = 0;
 	while (sqlite3_step(res) != SQLITE_DONE)
 	{
-
 		sscanf(sqlite3_column_text(res, 0), "%d-%d-%d", &dueAtInfo[i].year, &dueAtInfo[i].month, &dueAtInfo[i].day);
-
 		dueAtInfo[dueAtInfo[i].day].match = 1;
-
 		i++;
 	}
 
@@ -170,6 +166,7 @@ void printCalendar(void)
 int printMonth(int numberOfDays, int month, Day *dueAtInfo)
 {
 	printf("\n_________________________________________________________\n");
+
 	for (int i = 1; i < (numberOfDays + 1); i++)
 	{
 		if (dueAtInfo[i].match)
@@ -188,6 +185,7 @@ int printMonth(int numberOfDays, int month, Day *dueAtInfo)
 			printf("_________________________________________________________\n");
 		}
 	}
+
 	if (month != 2)
 	{
 		printf("|\n_________________\n");
