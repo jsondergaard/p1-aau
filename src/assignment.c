@@ -117,9 +117,21 @@ int addAssignment(void)
 
 	for (int i = 1; i <= 31; i++)
 	{
-		if(day[i].studentTime > 0){
+		int count=0,lowest = 10;
+		
+		if(day[i].studentTime < lowest)
+			lowest = day[i].studentTime;
+
+		if(day[i].studentTime == 0){
 			printf("%d: %d\n", i, day[i].studentTime);
+			count++;
 		}
+
+		if (count == 0)
+		{
+			
+		}
+		
 	}
 
 	/*char *sql = "INSERT INTO assignments(title, original_due_at, due_at, buffer_time, student_time, created_at, updated_at) VALUES(@title, @dueDate, @dueDate, @bufferTime, @studentTime, @createdAt, @updatedAt);";
