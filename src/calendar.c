@@ -5,7 +5,10 @@
 #include "assignment.h"
 #include "sqlite3.h"
 
-typedef struct {
+typedef struct
+{
+	int year;
+	int month;
 	int day;
 } Day;
 
@@ -43,9 +46,6 @@ int viewCalendar(void)
 void printCalendar(int month)
 {
 	int numberOfDays;
-	int sqlYear;
-	int sqlMonth;
-	int sqlDay;
 
 	printf("Which month would you like to view? (1, 2, 3, ...)\n");
 	scanf(" %d", &month);
@@ -78,14 +78,12 @@ void printCalendar(int month)
 	ERRCHECK
 
 	Day dueAtInfo[31];
-	char *sqlInfo;
 	int i = 0;
 	while (sqlite3_step(res) != SQLITE_DONE)
 	{
-		sqlInfo = sqlite3_column_text(res, 0);
-		sscanf(sqlInfo, " %d-%d-%d",sqlYear, sqlMonth, sqlDay);
-		dueAtInfo[i].day = sqlDay;
-		i = i + 1;
+		printf("%s", sqlite3_column_text(res, 0));
+		sscanf(sqlite3_column_text(res, 0), "%d-%d-%d", dueAtInfo[i].year, dueAtInfo[i].month, dueAtInfo[i].day);
+		i++;
 	}
 
 	sqlite3_finalize(res);
