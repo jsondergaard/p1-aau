@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "defines.h"
+#include "assignment.h"
 #include "sqlite3.h"
-
 #define ROWS 5
 #define COLUMNS 7
 
@@ -84,8 +84,10 @@ int viewDate(void)
 	char *sql = "SELECT * FROM assignments";
 	rc = sqlite3_exec(db, sql, callback, 0, &error);
 
+
+	printf("Enter the date you want to view (YYYY-MM-DD)");
 	char date;
-	scanf("%c",date);
+	scanf(" %c", &date);
 	printf("\n_________________\n");
 	for (int i = 0; i < 24; ++i)
 	{
