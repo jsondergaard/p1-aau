@@ -56,7 +56,7 @@ void printCalendar(void)
 
 	sqlite3 *db;
 	sqlite3_stmt *res;
-	char *error = 0;
+
 
 	int rc = sqlite3_open(DBFILE, &db);
 
