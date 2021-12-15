@@ -6,13 +6,6 @@
 #include <sqlite3.h>
 #include "defines.h"
 
-// typedef struct{
-// 	int year;
-// 	int month;
-// 	int day;
-// 	int studentTime;
-// } Day;
-
 int addAssignment(void);
 int listAssignments(void);
 int callback(void *, int, char **, char **);
