@@ -68,11 +68,11 @@ int addAssignment(void)
 	printf("\n");
 	fflush(stdin);
 
-	printf("When shall the assignment be released? (YYYY-MM-DD)\n> ");
+	printf("When should the assignment be due, at the earliest? (YYYY-MM-DD)\n> ");
 	scanf(" %[^\n]", &rangeStart[0]);
 	printf("\n");
 
-	printf("When is the assignment due? (YYYY-MM-DD)\n> ");
+	printf("When should the assignment be due, at the latest? (YYYY-MM-DD)\n> ");
 	scanf(" %[^\n]", &rangeEnd[0]);
 	printf("\n");
 
@@ -84,7 +84,7 @@ int addAssignment(void)
 	scanf(" %d", &studentTime);
 	printf("\n");
 
-	char *sql = "SELECT due_at,student_time FROM assignments WHERE due_at BETWEEN @start AND @end";
+	char *sql = "SELECT due_at,student_time FROM assignments WHERE due_at BETWEEN @start AND @end ORDER BY due_at";
 
 	rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
 	if (rc == SQLITE_OK)
@@ -97,13 +97,13 @@ int addAssignment(void)
 
 	while (sqlite3_step(res) != SQLITE_DONE)
 	{
-		printf(RED "%s: %d" RESET " student hours, don't pick this\n", sqlite3_column_text(res, 0), sqlite3_column_int(res, 1));
+		printf(RED "%s: %d" RESET " student hours\n", sqlite3_column_text(res, 0), sqlite3_column_int(res, 1));
 	}
 
 	sqlite3_finalize(res);
 
 	printf("\n");
-	printf("So when will it be? (YYYY-MM-DD)\n> ");
+	printf("When should the assignment be due? (YYYY-MM-DD)\n> ");
 	scanf(" %[^\n]", &dueDate[0]);
 	printf("\n");
 
