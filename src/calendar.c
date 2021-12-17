@@ -45,6 +45,8 @@ void printCalendar(void)
 	Day dueAtInfo[128];
 
 	printf("Which month would you like to view? (1, 2, 3, ...)\n");
+
+	printf(GREEN "> " RESET);
 	scanf(" %d", &month);
 
 	if (month == 2)
@@ -91,62 +93,62 @@ void printCalendar(void)
 	switch (month)
 	{
 	case 1:
-		printf(CYAN "JANUARY" RESET);
+		printf(YELLOW "\t\tJANUARY" RESET);
 		printMonth(numberOfDays, month, dueAtInfo);
 		break;
 
 	case 2:
-		printf(CYAN "FEBRUARY" RESET);
+		printf(YELLOW "\t\tFEBRUARY" RESET);
 		printMonth(numberOfDays, month, dueAtInfo);
 		break;
 
 	case 3:
-		printf(CYAN "MARCH" RESET);
+		printf(YELLOW "\t\tMARCH" RESET);
 		printMonth(numberOfDays, month, dueAtInfo);
 		break;
 
 	case 4:
-		printf(CYAN "APRIL" RESET);
+		printf(YELLOW "\t\tAPRIL" RESET);
 		printMonth(numberOfDays, month, dueAtInfo);
 		break;
 
 	case 5:
-		printf(CYAN "MAY" RESET);
+		printf(YELLOW "\t\tMAY" RESET);
 		printMonth(numberOfDays, month, dueAtInfo);
 		break;
 
 	case 6:
-		printf(CYAN "JUNE" RESET);
+		printf(YELLOW "\t\tJUNE" RESET);
 		printMonth(numberOfDays, month, dueAtInfo);
 		break;
 
 	case 7:
-		printf(CYAN "JULY" RESET);
+		printf(YELLOW "\t\tJULY" RESET);
 		printMonth(numberOfDays, month, dueAtInfo);
 		break;
 
 	case 8:
-		printf(CYAN "AUGUST" RESET);
+		printf(YELLOW "\t\tAUGUST" RESET);
 		printMonth(numberOfDays, month, dueAtInfo);
 		break;
 
 	case 9:
-		printf(CYAN "SEPTEMBER" RESET);
+		printf(YELLOW "\t\tSEPTEMBER" RESET);
 		printMonth(numberOfDays, month, dueAtInfo);
 		break;
 
 	case 10:
-		printf(CYAN "OCTOBER" RESET);
+		printf(YELLOW "\t\tOCTOBER" RESET);
 		printMonth(numberOfDays, month, dueAtInfo);
 		break;
 
 	case 11:
-		printf(CYAN "NOVEMBER" RESET);
+		printf(YELLOW "\t\tNOVEMBER" RESET);
 		printMonth(numberOfDays, month, dueAtInfo);
 		break;
 
 	case 12:
-		printf(CYAN "DECEMBER" RESET);
+		printf(YELLOW "\t\tDECEMBER" RESET);
 		printMonth(numberOfDays, month, dueAtInfo);
 		break;
 
@@ -166,9 +168,9 @@ int printMonth(int numberOfDays, int month, Day *dueAtInfo)
 	for (int i = 1; i < (numberOfDays + 1); i++)
 	{
 		if (dueAtInfo[i].match)
-			printf("|" RED "%d\t" RESET, i);
+			printf("|" RED "   %d\t" RESET, i);
 		else
-			printf("|" GREEN "%d\t" RESET, i);
+			printf("|" GREEN "   %d\t" RESET, i);
 
 		if (i % 7 == 0)
 		{

@@ -148,7 +148,7 @@ int listAssignments(void)
 
 	printf("List of assignments:\n");
 
-	char *sql = "SELECT * FROM assignments ORDER BY due_at";
+	char *sql = "SELECT * FROM assignments WHERE date() < due_at ORDER BY due_at";
 
 	rc = sqlite3_exec(db, sql, callback, 0, &error);
 
@@ -163,13 +163,27 @@ int listAssignments(void)
 	return 1;
 }
 
+char *strreplace(char *str, char x, char y)
+{
+	char *tmp = str;
+	while (*tmp)
+		if (*tmp == x)
+			*tmp++ = y; /* assign first, then incement */
+		else
+			*tmp++;
+
+	*tmp = '\0';
+	return str;
+}
+
 int callback(void *nil, int argc, char **argv,
 			 char **column)
 {
 	nil = 0;
-
+	char x = '_', y = ' ';
+	
 	for (int i = 1; i < argc; i++)
-		printf("%s = %s\n", column[i], argv[i] ? argv[i] : "NULL");
+		printf("%s:\n" GREEN "%s\n" RESET, strreplace(column[i], x, y), argv[i] ? argv[i] : "NULL");
 
 	printf("\n");
 
