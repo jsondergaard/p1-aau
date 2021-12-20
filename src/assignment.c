@@ -84,7 +84,7 @@ int addAssignment(void)
 	scanf(" %d", &studentTime);
 	printf("\n");
 
-	char *sql = "SELECT due_at,student_time FROM assignments WHERE due_at BETWEEN @start AND @end ORDER BY due_at";
+	char *sql = "SELECT due_at,SUM(student_time) FROM assignments WHERE due_at BETWEEN @start AND @end GROUP BY due_at ORDER BY SUM(student_time) DESC";
 
 	rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
 	if (rc == SQLITE_OK)
@@ -94,6 +94,8 @@ int addAssignment(void)
 	}
 
 	ERRCHECK
+
+	printf(YELLOW "These are the dates with the most student hours; stay clear.\n" RESET);
 
 	while (sqlite3_step(res) != SQLITE_DONE)
 	{
