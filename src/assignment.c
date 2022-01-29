@@ -66,7 +66,6 @@ int addAssignment(void)
 	printf("What do you want the assignment to be called?\n> ");
 	scanf(" %s", &title[0]);
 	printf("\n");
-	fflush(stdin);
 
 	printf("When should the assignment be due, at the earliest? (YYYY-MM-DD)\n> ");
 	scanf(" %[^\n]", &rangeStart[0]);
