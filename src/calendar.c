@@ -14,7 +14,7 @@ typedef struct
 
 int callback(void *, int, char **, char **);
 void printCalendar(void);
-int printMonth(int numberOfDays, int month, Day *dueAtInfo);
+void printMonth(int numberOfDays, int month, Day *dueAtInfo);
 
 int viewCalendar(void)
 {
@@ -64,7 +64,9 @@ void printCalendar(void)
 
 	ERRCHECK
 
-	char *sql = "SELECT due_at FROM assignments WHERE due_at BETWEEN strftime('%Y', CURRENT_TIMESTAMP) || '-' || @month || '-01' AND strftime('%Y', CURRENT_TIMESTAMP) || '-' || @month || '-31'";
+	char *sql = "SELECT due_at FROM assignments WHERE due_at BETWEEN strftime('%Y', CURRENT_TIMESTAMP) || '-0' || @month || '-01' AND strftime('%Y', CURRENT_TIMESTAMP) || '-0' || @month || '-31'";
+
+	printf(RED "%d\n" RESET, month);
 
 	rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
 	if (rc == SQLITE_OK)
@@ -161,7 +163,7 @@ void printCalendar(void)
 	getchar();
 }
 
-int printMonth(int numberOfDays, int month, Day *dueAtInfo)
+void printMonth(int numberOfDays, int month, Day *dueAtInfo)
 {
 	printf("\n_________________________________________________________\n");
 
@@ -174,13 +176,10 @@ int printMonth(int numberOfDays, int month, Day *dueAtInfo)
 
 		if (i % 7 == 0)
 		{
-			printf("|\n");
-			if (month == 2 && i == 28)
-			{
-				printf("_________________________________________________________\n");
-				return 0;
-			}
-			printf("_________________________________________________________\n");
+			if(month == 2 && i == 28)
+				break;
+
+			printf("|\n_________________________________________________________\n");
 		}
 	}
 

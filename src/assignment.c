@@ -185,7 +185,16 @@ int callback(void *nil, int argc, char **argv,
 	char x = '_', y = ' ';
 	
 	for (int i = 1; i < argc; i++)
-		printf("%s:\n" GREEN "%s\n" RESET, strreplace(column[i], x, y), argv[i] ? argv[i] : "NULL");
+	{
+		printf("%s:\t", strreplace(column[i], x, y));
+		if(i == 1 || i == 2)
+			printf("\t");
+		printf(GREEN "%s" RESET, argv[i] ? argv[i] : "NULL");
+		if (i == 4)
+			printf(" hours\n");
+		else
+			printf("\n");
+	}
 
 	printf("\n");
 
