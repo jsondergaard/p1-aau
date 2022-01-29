@@ -52,9 +52,9 @@ void printCalendar(void)
 	if (month == 2)
 		numberOfDays = 28;
 	else if (month % 2 == 0)
-		numberOfDays = 31;
-	else
 		numberOfDays = 30;
+	else
+		numberOfDays = 31;
 
 	sqlite3 *db;
 	sqlite3_stmt *res;
